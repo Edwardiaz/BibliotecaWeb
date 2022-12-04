@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
+<%@page import="java.util.List"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -15,42 +17,53 @@
       <li class="nav-item active">
         <a class="nav-link" href="${contextPath}/index.jsp">Inicio <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Mantenimiento
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="${contextPath}/UsuarioControlador?accion=listar">Usuarios</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="${contextPath}/RolControlador?accion=listar">Roles</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="${contextPath}/ArtistaControlador?accion=listar">Artistas</a>
-          <a class="dropdown-item" href="${contextPath}/AutorControlador?accion=listar">Autores</a>
-          <a class="dropdown-item" href="${contextPath}/DirectorControlador?accion=listar">Directores</a>
-          <a class="dropdown-item" href="${contextPath}/EditorialControlador?accion=listar">Editoriales</a>
-          <a class="dropdown-item" href="${contextPath}/GeneroControlador?accion=listar">Generos</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Prestamos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="${contextPath}/Prestamo?accion=listar">Listar</a>
-        </div>
-      </li>
+      <c:if test="${rolUsuario == 1}">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mantenimiento
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="${contextPath}/UsuarioControlador?accion=listar">Usuarios</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="${contextPath}/RolControlador?accion=listar">Roles</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="${contextPath}/ArtistaControlador?accion=listar">Artistas</a>
+            <a class="dropdown-item" href="${contextPath}/AutorControlador?accion=listar">Autores</a>
+            <a class="dropdown-item" href="${contextPath}/DirectorControlador?accion=listar">Directores</a>
+            <a class="dropdown-item" href="${contextPath}/EditorialControlador?accion=listar">Editoriales</a>
+            <a class="dropdown-item" href="${contextPath}/GeneroControlador?accion=listar">Generos</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Prestamos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="${contextPath}/Prestamo?accion=listar">Listar</a>
+          </div>
+        </li>
+      </c:if>
       <li class="nav-item">
         <a class="nav-link" href="#">Consultas</a>
       </li>
     </ul>
-        <ul class="navbar-nav mr-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Registrarse</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Ingresar</a>
-            </li>            
-        </ul>
+        <c:if test="${rolUsuario == null}">
+            <ul class="navbar-nav mr-5">
+                <li class="nav-item">
+                  <a class="nav-link" href="${contextPath}/LoginControlador?accion=login">Ingresar</a>
+                </li>            
+            </ul>
+        </c:if>
+        <c:if test="${rolUsuario != null}">
+            <ul class="navbar-nav mr-5">
+                <li class="nav-item mr-5">
+                  <a class="nav-link" href="${contextPath}/LoginControlador?accion=logout">Hola ${nombreUsuario}!</a>
+                </li>                 
+                <li class="nav-item">
+                  <a class="nav-link" href="${contextPath}/LoginControlador?accion=logout">Salir</a>
+                </li>            
+            </ul>
+        </c:if>      
   </div>
 </nav>
         

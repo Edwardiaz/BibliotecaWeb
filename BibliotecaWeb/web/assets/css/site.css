@@ -13,3 +13,9 @@ and open the template in the editor.
 div.dataTables_wrapper div.dataTables_length select{
     width: 75px;
 }
+
+#form_login {
+    left: 50%;
+    top: 40%;
+    margin:auto;
+}

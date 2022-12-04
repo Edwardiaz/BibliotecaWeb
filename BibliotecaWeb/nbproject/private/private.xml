@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
             <url>src/java/Modelo/Usuario.java</url>
             <bookmark id="1">
@@ -9,8 +9,18 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>src/java/Controlador/LoginControlador.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>103</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Eduardo%20Trujillo/Documents/ChifungOneDrive/OneDrive/UDB/2022/2022-2/POO901/Unidad_5/Proyecto_Fase_2/BibliotecaWeb/BibliotecaWeb/src/java/Controlador/UsuarioControlador.java</file>
+        </group>
     </open-files>
 </project-private>
