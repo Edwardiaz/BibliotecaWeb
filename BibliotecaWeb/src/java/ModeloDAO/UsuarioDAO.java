@@ -205,4 +205,35 @@ public class UsuarioDAO{
             Conexion.close(con);
         } 
     }
+    
+    public Usuario login(String nickname, String pass) throws SQLException{
+        try{
+            //Codigo SQL para insertar registro a tabla
+            String sql = "SELECT id, nombre, apellido, nickname, codigo_rol FROM usuarios WHERE nickname='"+ nickname +"' AND pass='"+ pass +"'";
+
+            con = Conexion.getConnection();
+            ps = con.prepareStatement(sql);
+            
+            rs = ps.executeQuery();
+            
+            Usuario user = new Usuario();
+            
+            if(rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setNombre(rs.getString("nombre"));
+                user.setApellido(rs.getString("apellido"));
+                user.setNickname(rs.getString("nickname"));
+                user.setCodigo_rol(rs.getInt("codigo_rol"));
+            }
+            
+            return user;
+            
+        } catch (SQLException ex){
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            Conexion.close(ps);
+            Conexion.close(con);
+        }
+    }
 }

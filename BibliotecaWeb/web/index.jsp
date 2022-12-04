@@ -14,7 +14,7 @@
         <%@ include file='/assets.jsp' %>
     </head>
     </head>
-    <body">
+    <body>
         <jsp:include page="/menu.jsp"/>
         <div class="container pt-5">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"">
@@ -55,3 +55,15 @@
 
     </body>
 </html>
+
+<script type="text/javascript">
+    <c:if test="${not empty exito}">
+        alertify.success('${exito}');
+       <c:set var="exito" value="" scope="session" />
+    </c:if>
+    
+    <c:if test="${not empty error}">
+        alertify.error('${error}');
+        <c:set var="error" value="" scope="session" />
+    </c:if>
+</script>

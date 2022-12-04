@@ -12,6 +12,30 @@
         <servlet-name>RolControlador</servlet-name>
         <servlet-class>Controlador.RolControlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AutorControlador</servlet-name>
+        <servlet-class>Controlador.AutorControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ArtistaControlador</servlet-name>
+        <servlet-class>Controlador.ArtistaControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DirectorControlador</servlet-name>
+        <servlet-class>Controlador.DirectorControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditorialControlador</servlet-name>
+        <servlet-class>Controlador.EditorialControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GeneroControlador</servlet-name>
+        <servlet-class>Controlador.GeneroControlador</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginControlador</servlet-name>
+        <servlet-class>Controlador.LoginControlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Usuario</servlet-name>
         <url-pattern>/Usuario</url-pattern>
@@ -23,6 +47,30 @@
     <servlet-mapping>
         <servlet-name>RolControlador</servlet-name>
         <url-pattern>/RolControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutorControlador</servlet-name>
+        <url-pattern>/AutorControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArtistaControlador</servlet-name>
+        <url-pattern>/ArtistaControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DirectorControlador</servlet-name>
+        <url-pattern>/DirectorControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditorialControlador</servlet-name>
+        <url-pattern>/EditorialControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GeneroControlador</servlet-name>
+        <url-pattern>/GeneroControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginControlador</servlet-name>
+        <url-pattern>/LoginControlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
