@@ -18,15 +18,15 @@ public class Materiales {
     private String duracion;
     private String numeroDeCanciones;
     private Integer unidadesDisponibles;
-    private Integer codigoArtista;
-    private Integer codigoAutor;
-    private Integer codigoDirector;
+    private String artista;
+    private String autor;
+    private String director;
     private String ubicacion;
     private String nombre_autor_CV;
-    private Integer codigoEditorial;
-    private Integer codigoGenero;
-    private Integer codigoTipoMaterial;
- //   @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoMaterial")
+    private String editorial;
+    private String genero;
+    private String tipoMaterial;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoMaterial")
     private List<Prestamos> prestamosList;
 
     public Materiales() {
@@ -41,7 +41,7 @@ public class Materiales {
         this.titulo = titulo;
     }
     
-    public Materiales(String id, String titulo, String numeroDePaginas, String isbn, String periodicidad, Date fechaPublicacion, String duracion, String numeroDeCanciones, Integer unidadesDisponibles, Integer codigoArtista, Integer codigoAutor, Integer codigoDirector, String ubicacion, String nombre_autor_CV, Integer codigoEditorial, Integer codigoGenero, Integer codigoTipoMaterial) {
+    public Materiales(String id, String titulo, String numeroDePaginas, String isbn, String periodicidad, Date fechaPublicacion, String duracion, String numeroDeCanciones, Integer unidadesDisponibles, String codigoArtista, String codigoAutor, String codigoDirector, String ubicacion, String nombre_autor_CV, String codigoEditorial, String codigoGenero, String codigoTipoMaterial) {
         this.id = id;
         this.titulo = titulo;
         this.numeroDePaginas = numeroDePaginas;
@@ -51,14 +51,14 @@ public class Materiales {
         this.duracion = duracion;
         this.numeroDeCanciones = numeroDeCanciones;
         this.unidadesDisponibles = unidadesDisponibles;
-        this.codigoArtista = codigoArtista;
-        this.codigoAutor = codigoAutor;
-        this.codigoDirector = codigoDirector;
+        this.artista = codigoArtista;
+        this.autor = codigoAutor;
+        this.director = codigoDirector;
         this.ubicacion = ubicacion;
         this.nombre_autor_CV = nombre_autor_CV;
-        this.codigoEditorial = codigoEditorial;
-        this.codigoGenero = codigoGenero;
-        this.codigoTipoMaterial = codigoTipoMaterial;
+        this.editorial = codigoEditorial;
+        this.genero = codigoGenero;
+        this.tipoMaterial = codigoTipoMaterial;
     }
 
     public String getId() {
@@ -133,28 +133,28 @@ public class Materiales {
         this.unidadesDisponibles = unidadesDisponibles;
     }
 
-    public Integer getCodigoArtista() {
-        return codigoArtista;
+    public String getArtista() {
+        return artista;
     }
 
-    public void setCodigoArtista(Integer codigoArtista) {
-        this.codigoArtista = codigoArtista;
+    public void setArtista(String artista) {
+        this.artista = artista;
     }
 
-    public Integer getCodigoAutor() {
-        return codigoAutor;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setCodigoAutor(Integer codigoAutor) {
-        this.codigoAutor = codigoAutor;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
-    public Integer getCodigoDirector() {
-        return codigoDirector;
+    public String getDirector() {
+        return director;
     }
 
-    public void setCodigoDirector(Integer codigoDirector) {
-        this.codigoDirector = codigoDirector;
+    public void setDirector(String director) {
+        this.director = director;
     }
 
     public String getUbicacion() {
@@ -173,28 +173,28 @@ public class Materiales {
         this.nombre_autor_CV = nombre_autor_CV;
     }
 
-    public Integer getCodigoEditorial() {
-        return codigoEditorial;
+    public String getEditorial() {
+        return editorial;
     }
 
-    public void setCodigoEditorial(Integer codigoEditorial) {
-        this.codigoEditorial = codigoEditorial;
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
     }
 
-    public Integer getCodigoGenero() {
-        return codigoGenero;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setCodigoGenero(Integer codigoGenero) {
-        this.codigoGenero = codigoGenero;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
-    public Integer getCodigoTipoMaterial() {
-        return codigoTipoMaterial;
+    public String getTipoMaterial() {
+        return tipoMaterial;
     }
 
-    public void setCodigoTipoMaterial(Integer codigoTipoMaterial) {
-        this.codigoTipoMaterial = codigoTipoMaterial;
+    public void setTipoMaterial(String tipoMaterial) {
+        this.tipoMaterial = tipoMaterial;
     }
 
     public List<Prestamos> getPrestamosList() {
