@@ -89,7 +89,7 @@ public class MaterialesDAO {
         try {
             rows = 0;
                 //Codigo SQL para insertar registro a tabla
-            String sql = "INSERT INTO `rol`(rol, numero_prestamos, dias_prestamo) VALUES(?,?,?)";
+            String sql = "INSERT INTO `materiales`(rol, numero_prestamos, dias_prestamo) VALUES(?,?,?)";
         
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);
@@ -111,163 +111,163 @@ public class MaterialesDAO {
     }
     
     /////////////////////////////////////////////
-    public int insertarLibros(String titulo, int pag, int idEditorial, String isbn, java.sql.Date conversion, int u_disponible, String autor, String editorial, String ubicacion, int codigo){        
+    public int insertarLibros(Materiales materiales, int codigo) 
+            throws SQLException{        
+        
         String sql = "INSERT INTO materiales (id,titulo,codigo_tipo_material,"
                 + "codigo_autor,numero_de_paginas,codigo_editorial,isbn,"
                 + "fecha_publicacion,unidades_disponibles, ubicacion) VALUES (?,?,4,?,?,?,?,?,?,?)";
-        PreparedStatement stmt = null;
+        //PreparedStatement stmt = null;
+        ps = conn.prepareStatement(sql);
         Connection conn = null;
         int rows = 0;
         
         //Llamar a los siguientes métodos, pasándole parámetros para obtener sus respectivos ID
-        int autorID = consultarAutorPorNombre(autor);
-        int editorialID = consultarEditorialPorNombre(editorial);
+        int autorID = consultarAutorPorNombre(materiales.getAutor());
+        int editorialID = consultarEditorialPorNombre(materiales.getEditorial());
 
         try{
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             int index = 1;
             if(codigo==1){
-                stmt.setString(index++, crearID("LIB"));
+                ps.setString(index++, crearID("LIB"));
             } else {
-                stmt.setString(index++, crearID("OBR"));   
+                ps.setString(index++, crearID("OBR"));   
             }
-            stmt.setString(index++, titulo);
-            stmt.setInt(index++, autorID);
-            stmt.setInt(index++, pag);
-            stmt.setInt(index++, editorialID);
-            stmt.setString(index++, isbn);
-            stmt.setDate(index++, conversion);
-            stmt.setInt(index++, u_disponible);
-            stmt.setString(index++, ubicacion);
+            ps.setString(index++, materiales.getTitulo());
+            ps.setInt(index++, autorID);
+            ps.setString(index++, materiales.getNumeroDePaginas());
+            ps.setInt(index++, editorialID);
+            ps.setString(index++, materiales.getIsbn());
+            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setInt(index++, materiales.getUnidadesDisponibles());
+            ps.setString(index++, materiales.getUbicacion());
 
-            rows = stmt.executeUpdate();
+            rows = ps.executeUpdate();
         }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return rows;
     }
     
-    public int insertarCV(String titulo, String num_pag, String autorCV, int u_disponible, java.sql.Date fecha, String ubicacion){        
+    public int insertarCV(Materiales materiales){ 
+        
         String sql = "INSERT INTO materiales (id,titulo,codigo_tipo_material,"
                 + "numero_de_paginas, ubicacion, nombre_autor_CV,"
                 + "fecha_publicacion,unidades_disponibles) VALUES (?,?,6,?,?,?,?,?)";
-        PreparedStatement stmt = null;
         Connection conn = null;
         int rows = 0;
-        
-        //Llamar a los siguientes métodos, pasándole parámetros para obtener sus respectivos ID
-        //int autorID = consultarAutorPorNombre(autor);
-        //int editorialID = consultarEditorialPorNombre(editorial);
 
         try{
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             int index = 1;
-            stmt.setString(index++, crearID("CV"));
-            stmt.setString(index++, titulo);
-            stmt.setString(index++, num_pag);
-            stmt.setString(index++, ubicacion);
-            stmt.setString(index++, autorCV);
-            stmt.setDate(index++, fecha);
-            stmt.setInt(index++, u_disponible);
-            rows = stmt.executeUpdate();
+            ps.setString(index++, crearID("CV"));
+            ps.setString(index++, materiales.getTitulo());
+            ps.setString(index++, materiales.getNumeroDePaginas());
+            ps.setString(index++, materiales.getUbicacion());
+            ps.setString(index++, materiales.getNombre_autor_CV());
+            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setInt(index++, materiales.getUnidadesDisponibles());
+            rows = ps.executeUpdate();
         }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return rows;
     }
     
-    public int insertarCD(String titulo, String duracion, String canciones, int u_disponible, String artista, String genero, java.sql.Date conversion, String ubicacion){
+    public int insertarCD(Materiales materiales){
         String sql = "INSERT INTO materiales (id,titulo, fecha_publicacion, codigo_artista,codigo_tipo_material,codigo_genero,duracion,numero_de_canciones,unidades_disponibles, ubicacion)"
         + "VALUES (?,?,?,1,?,?,?,?,?,?)";
-        PreparedStatement stmt = null;
+        //PreparedStatement ps = null;
         int rows = 0;
-        int idArtista = consultarArtistaPorNombre(artista);
-        int idGenero = consultarGeneroPorNombre(genero);
+        int idArtista = consultarArtistaPorNombre(materiales.getArtista());
+        int idGenero = consultarGeneroPorNombre(materiales.getGenero());
 
         try{
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             int index = 1;
-            stmt.setString(index++, crearID("CDA"));
-            stmt.setString(index++, titulo);
-            stmt.setDate(index++, conversion);
-            stmt.setInt(index++, idArtista);
-            stmt.setInt(index++, idGenero);
-            stmt.setString(index++, duracion);
-            stmt.setString(index++, canciones);
-            stmt.setInt(index++, u_disponible);
+            ps.setString(index++, crearID("CDA"));
+            ps.setString(index++, materiales.getTitulo());
+            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setInt(index++, idArtista);
+            ps.setInt(index++, idGenero);
+            ps.setString(index++, materiales.getDuracion());
+            ps.setString(index++, materiales.getNumeroDeCanciones());
+            ps.setInt(index++, materiales.getUnidadesDisponibles());
+            ps.setString(index++, materiales.getUbicacion());
 
-            rows = stmt.executeUpdate();
+            rows = ps.executeUpdate();
         }catch(Exception e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return rows;
     }
     
-    public int insertarDVD(String titulo, String director, String genre, String duracion, java.sql.Date conversion, String u_disponible, String ubicacion){
+    public int insertarDVD(Materiales materiales){
         String sql = "INSERT INTO materiales (id,titulo,codigo_director,codigo_tipo_material,codigo_genero,duracion, u_disponibles, ubicacion)"
                         + "VALUES (?,?,?,2,?,?, ?, ?)";
-        int idGenero = consultarGeneroPorNombre(genre);
-        int idDirector = consultarDirectorPorNombre(director);
-        PreparedStatement stmt = null;
+        int idGenero = consultarGeneroPorNombre(materiales.getGenero());
+        int idDirector = consultarDirectorPorNombre(materiales.getDirector());
+        //PreparedStatement ps = null;
         //ResultSet rs = null;
         int rows = 0;
 
         try{
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             int index = 1;
-            stmt.setString(index++, crearID("DVD"));
-            stmt.setString(index++, titulo);
-            stmt.setInt(index++, idDirector);
-            stmt.setInt(index++, idGenero);
-            stmt.setString(index, duracion);
-            stmt.setDate(index++, conversion);
-            stmt.setString(index++, u_disponible);
-            stmt.setString(index++, ubicacion);
-            rows = stmt.executeUpdate();
+            ps.setString(index++, crearID("DVD"));
+            ps.setString(index++, materiales.getTitulo());
+            ps.setInt(index++, idDirector);
+            ps.setInt(index++, idGenero);
+            ps.setString(index, materiales.getDuracion());
+            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setInt(index++, materiales.getUnidadesDisponibles());
+            ps.setString(index++, materiales.getUbicacion());
+            rows = ps.executeUpdate();
         }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return rows;
     }
     
-    public int insertarRevista(String titulo, String editorial, String periodo, java.sql.Date conversion, int u_disponible, String ubicacion){
+    public int insertarRevista(Materiales materiales){
         String sql = "INSERT INTO materiales (id,titulo,codigo_editorial,codigo_tipo_material,periodicidad,fecha_publicacion,unidades_disponibles, ubicacion)"
                  + "VALUES (?,?,?,3,?,?,?,?)";
-        int idEditorial = consultarEditorialPorNombre(editorial);
-         PreparedStatement stmt = null;
+        int idEditorial = consultarEditorialPorNombre(materiales.getEditorial());
          int rows = 0;
 
          try{
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             int index = 1;
-            stmt.setString(index++, crearID("REV"));
-            stmt.setString(index++, titulo);
-            stmt.setInt(index++, idEditorial);
-            stmt.setString(index++, periodo);
-            stmt.setDate(index++, conversion);
-            stmt.setInt(index++, u_disponible);
-            rows = stmt.executeUpdate();
+            ps.setString(index++, crearID("REV"));
+            ps.setString(index++, materiales.getTitulo());
+            ps.setInt(index++, idEditorial);
+            ps.setString(index++, materiales.getPeriodicidad());
+            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setInt(index++, materiales.getUnidadesDisponibles());
+            ps.setString(index++, materiales.getUbicacion());
+            rows = ps.executeUpdate();
          }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
          } finally{
-             Conexion.close(stmt);
+             Conexion.close(ps);
              Conexion.close(conn);
          } 
         return rows;
@@ -276,15 +276,15 @@ public class MaterialesDAO {
     public String crearID(String tipoMaterial){
         //Estructura del ID: DVD00001
         String sql = "SELECT id FROM materiales";
-        PreparedStatement stmt = null;
+        //PreparedStatement ps = null;
         int[] arrayID = new int[8];
         int i = 0;
         String id = "";
         ResultSet rs = null;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             //vamos convirtiendo cada ID en int quitando las tres primera letras
             //y depositando el numero en un array
             while (rs.next()) {                
@@ -327,7 +327,7 @@ public class MaterialesDAO {
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return id;
@@ -335,13 +335,13 @@ public class MaterialesDAO {
     
     public int consultarAutorPorNombre(String autor){
         String sql = "SELECT id, nombre_autor FROM AUTORES WHERE nombre_autor = '"+autor+"';";
-        PreparedStatement stmt = null;
+        //PreparedStatement ps = null;
         ResultSet rs = null;
         int id = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {                
                 String nombreAutor = rs.getString("nombre_autor");
                 id = rs.getInt("id");
@@ -350,7 +350,7 @@ public class MaterialesDAO {
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return id;
@@ -358,13 +358,13 @@ public class MaterialesDAO {
     
     public int consultarEditorialPorNombre(String editorial){
         String sql = "SELECT id, nombre_editorial FROM EDITORIALES WHERE nombre_editorial = '"+editorial+"';";
-        PreparedStatement stmt = null;
+        //PreparedStatement stmt = null;
         ResultSet rs = null;
         int id = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {                
                 String nombreAutor = rs.getString("nombre_editorial");
                 id = rs.getInt("id");
@@ -373,7 +373,7 @@ public class MaterialesDAO {
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return id;
@@ -381,13 +381,13 @@ public class MaterialesDAO {
     
     public int consultarArtistaPorNombre(String artista){
         String sql = "SELECT id, nombre_artista FROM ARTISTAS WHERE nombre_artista = '"+artista+"';";
-        PreparedStatement stmt = null;
+        //PreparedStatement stmt = null;
         ResultSet rs = null;
         int id = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {                
                 String nombreArtista = rs.getString("nombre_artista");
                 id = rs.getInt("id");
@@ -396,7 +396,7 @@ public class MaterialesDAO {
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return id;
@@ -404,13 +404,13 @@ public class MaterialesDAO {
     
     public int consultarGeneroPorNombre(String genero){
         String sql = "SELECT id, nombre_genero FROM GENEROS WHERE nombre_genero = '"+genero+"';";
-        PreparedStatement stmt = null;
+        //PreparedStatement stmt = null;
         ResultSet rs = null;
         int id = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {                
                 String nombreGenero = rs.getString("nombre_genero");
                 id = rs.getInt("id");
@@ -419,7 +419,7 @@ public class MaterialesDAO {
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return id;
@@ -427,13 +427,13 @@ public class MaterialesDAO {
     
     public int consultarDirectorPorNombre(String director){
         String sql = "SELECT id, nombre_director FROM DIRECTORES WHERE nombre_director = '"+director+"';";
-        PreparedStatement stmt = null;
+        //PreparedStatement stmt = null;
         ResultSet rs = null;
         int id = 0;
         try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {                
                 String nombreDirector = rs.getString("nombre_director");
                 id = rs.getInt("id");
@@ -442,18 +442,41 @@ public class MaterialesDAO {
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally{
-            Conexion.close(stmt);
+            Conexion.close(ps);
+            Conexion.close(conn);
+        }
+        return id;
+    }
+    
+    public int consultarTipoMaterialNombre(String tipo){
+        String sql = "SELECT id, tipo_material FROM tipo_material WHERE tipo_material = '"+tipo+"';";
+        //PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int id = 0;
+        try {
+            conn = Conexion.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                String nombreDirector = rs.getString("tipo_material");
+                id = rs.getInt("id");
+            }
+            
+        } catch (Exception e) {
+            Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally{
+            Conexion.close(ps);
             Conexion.close(conn);
         }
         return id;
     }
     /////////////////////////////////////////////
     
-    public boolean rolExiste(String rol) throws SQLException{
+    public boolean materialExiste(String tituloMaterial) throws SQLException{
         try {
             int rows = 0;
             //Codigo SQL para insertar registro a tabla
-            String sql = "SELECT * FROM rol WHERE rol ='"+ rol +"'";
+            String sql = "SELECT * FROM materiales WHERE titulo = '"+ tituloMaterial +"'";
 
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);
@@ -475,7 +498,25 @@ public class MaterialesDAO {
     
     public Materiales ver(String id) {
         try{
-            String sql = "SELECT id, rol, numero_prestamos, dias_prestamo FROM rol WHERE id ='"+ id +"'";
+            String sql = "SELECT "
+                +"materiales.id, materiales.titulo,autores.nombre_autor AS Autor, "
+                +"materiales.numero_de_paginas, editoriales.nombre_editorial AS "
+                +"Editorial, materiales.isbn, materiales.periodicidad, "
+                +"date_format(materiales.fecha_publicacion, \"%d/%m/%Y\"), "
+                +"AS fecha, materiales.ubicacion, materiales.nombre_autor_cv, "
+                +"artistas.nombre_artista AS Artista, materiales.duracion, "
+                +"materiales.numero_de_canciones,materiales.unidades_disponibles, "
+                +"directores.nombre_director as Director, materiales.duracion, "
+                +"generos.nombre_genero AS Genero,tipo_material.tipo_material "
+                +"AS Tipo from materiales LEFT JOIN directores on "
+                +"directores.id = materiales.codigo_director LEFT JOIN generos "
+                +"ON generos.id = materiales.codigo_genero LEFT JOIN "
+                +"tipo_material ON tipo_material.id = "
+                +"materiales.codigo_tipo_material LEFT JOIN "
+                +"autores on autores.id = materiales.codigo_autor LEFT JOIN "
+                +"artistas ON artistas.id = materiales.codigo_artista LEFT JOIN "
+                +"editoriales ON editoriales.id = materiales.codigo_editorial  "
+                + "WHERE materiales.id ='"+ id +"'";
 
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);
@@ -520,19 +561,48 @@ public class MaterialesDAO {
         }
     }
 
-    public int actualizar(Materiales materiales) throws SQLException{
+    public int actualizar(Materiales material) throws SQLException{
         try {
             rows = 0;
                 //Codigo SQL para insertar registro a tabla
-            String sql = "UPDATE materiales SET rol = ?, numero_prestamos = ?, dias_prestamo = ? WHERE id ='" + materiales.getId() + "'";
+            String sql = //"UPDATE materiales SET rol = ?, numero_prestamos = ?, dias_prestamo = ? WHERE id ='" + materiales.getId() + "'";
+                "UPDATE materiales SET titulo=?, codigo_tipo_material=?, "
+                + "codigo_autor=?, numero_de_paginas=?, codigo_editorial=?, isbn=?, "
+                + "periodicidad=?, fecha_publicacion=?, codigo_artista=?, "
+                + "codigo_genero=?, duracion=?, numero_de_canciones=?, "
+                + "codigo_director=?, ubicacion=?, nombre_autor_cv=?, "
+                + "unidades_disponibles=? WHERE id ='" +material.getId()+ "'";
         
+            int idGenero = consultarGeneroPorNombre(material.getGenero());
+            int idDirector = consultarDirectorPorNombre(material.getDirector());
+            int editorialID = consultarEditorialPorNombre(material.getEditorial());
+            int tipoMaterialID = consultarTipoMaterialNombre(material.getTipoMaterial());
+            int autorID = consultarAutorPorNombre(material.getAutor());
+            int idArtista = consultarArtistaPorNombre(material.getArtista());
+            
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);
             
-            /*ps.setString(1, rol.getRol());
-            ps.setInt(2, rol.getNumero_prestamos());
+            /*ps.setString(1, material.getTitulo());
+            ps.setInt(2, );
             ps.setInt(3, rol.getDias_prestamo());*/
             
+            ps.setString(1, material.getTitulo());
+            ps.setInt(2, tipoMaterialID);
+            ps.setInt(3, autorID);
+            ps.setString(4, material.getNumeroDePaginas());
+            ps.setInt(5, editorialID);
+            ps.setString(6, material.getIsbn());
+            ps.setString(7, material.getPeriodicidad());
+            ps.setDate(8, material.getFechaPublicacion());
+            ps.setInt(9, idArtista);
+            ps.setInt(10, idGenero);
+            ps.setString(11, material.getDuracion());
+            ps.setString(12, material.getNumeroDeCanciones());
+            ps.setInt(13, idDirector);
+            ps.setString(14, material.getUbicacion());
+            ps.setString(15, material.getNombre_autor_CV());
+            ps.setInt(16, material.getUnidadesDisponibles());
             rows = ps.executeUpdate();        
             return rows;
             
