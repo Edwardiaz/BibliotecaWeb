@@ -60,7 +60,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6 form-group">
-                            <label>Fecha de Nacimiento</label>
+                            <label>Fecha de Nacimiento(Mes/Día/Año)</label>
                             <input type="date" name="txtFechaNacimiento" class="form-control" value="${usuario.fecha_nacimiento }" placeholder="Ingrese fecha de nacimiento de usuario"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
                         <div class="col-6 form-group">

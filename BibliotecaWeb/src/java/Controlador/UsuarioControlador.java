@@ -29,6 +29,7 @@ public class UsuarioControlador extends HttpServlet {
     String listar = "usuarios/listar.jsp";
     String agregar = "usuarios/agregar.jsp";
     String editar = "usuarios/editar.jsp";
+    String perfil = "usuarios/perfil.jsp";
     
     Usuario usr = new Usuario();
     UsuarioDAO dao = new UsuarioDAO();
@@ -234,6 +235,71 @@ public class UsuarioControlador extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
                 //acceso = listar;
             }                
+        }else if(action.equals("perfil")){
+            acceso = perfil;
+            
+            String id = request.getSession().getAttribute("idUsuario").toString();
+            usr = dao.ver(id);
+            
+            if(usr != null){
+                request.setAttribute("usuario", usr);
+                //request.getRequestDispatcher("/usuarios/editar.jsp").forward(request, response);
+                RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                vista.forward(request, response);                     
+            }else{
+                response.sendRedirect(request.getContextPath() + "/error404.jsp");
+            }
+        }else if(action.equals("Actualizar Perfil")){
+            try {
+                listaErrores.clear();
+
+                usr.setNombre(request.getParameter("txtNombre"));
+                usr.setApellido(request.getParameter("txtApellido"));
+                usr.setNickname(request.getParameter("txtNickname"));
+                usr.setEmail(request.getParameter("txtEmail"));
+                usr.setFecha_nacimiento(request.getParameter("txtFechaNacimiento"));
+                usr.setPass(request.getParameter("txtPass"));
+
+                if (Validaciones.isEmpty(usr.getNombre())) {
+                    listaErrores.add("Campo Nombre obligatorio");
+                }            
+                if (Validaciones.isEmpty(usr.getApellido())) {
+                    listaErrores.add("Campo Apellido es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getNickname())) {
+                    listaErrores.add("Campo Nickname es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getEmail())) {
+                    listaErrores.add("Campo Email es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getFecha_nacimiento())) {
+                    listaErrores.add("Campo Fecha de Nacimiento es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getPass())) {
+                    listaErrores.add("Campo Contraseña es obligatorio");
+                }
+
+                if (listaErrores.size() > 0) {
+                    request.setAttribute("listaErrores", listaErrores);
+                    request.setAttribute("usuario", usr);
+                    //request.getRequestDispatcher("UsuarioControlador?accion=agregar").forward(request, response);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else {
+                    if (dao.actualizarPerfil(usr) > 0) {
+                        request.getSession().setAttribute("exito", "Usuario actualizado exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+                        //acceso = listar;
+                    } else {
+                        request.getSession().setAttribute("error", "El usuario no ha podido ser actualizado!");
+                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+                        //acceso = listar;
+                    }
+                }
+            } catch (SQLException ex) {
+               Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
     }
 

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author Eduardo Trujillo
  */
 public class RolDAO{
-    Connection con;
+    Connection con = null;
     PreparedStatement ps;
     ResultSet rs;
     int rows = 0;
@@ -34,7 +34,10 @@ public class RolDAO{
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT id, rol, numero_prestamos, dias_prestamo FROM rol";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -51,9 +54,6 @@ public class RolDAO{
         } catch (SQLException ex){
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         } 
     }
 
@@ -63,7 +63,10 @@ public class RolDAO{
                 //Codigo SQL para insertar registro a tabla
             String sql = "INSERT INTO `rol`(rol, numero_prestamos, dias_prestamo) VALUES(?,?,?)";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             ps.setString(1, rol.getRol());
@@ -76,10 +79,7 @@ public class RolDAO{
         } catch (SQLException ex){
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }    
     
     public boolean rolExiste(String rol) throws SQLException{
@@ -88,7 +88,10 @@ public class RolDAO{
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT * FROM rol WHERE rol ='"+ rol +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -98,9 +101,6 @@ public class RolDAO{
             
         } catch (SQLException ex){
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         }
         
         return false;
@@ -111,7 +111,10 @@ public class RolDAO{
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT id, rol, numero_prestamos, dias_prestamo FROM rol WHERE id ='"+ id +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             rs = ps.executeQuery();
@@ -130,9 +133,6 @@ public class RolDAO{
         } catch (SQLException ex){
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         }
     }
 
@@ -142,7 +142,10 @@ public class RolDAO{
                 //Codigo SQL para insertar registro a tabla
             String sql = "UPDATE rol SET rol = ?, numero_prestamos = ?, dias_prestamo = ? WHERE id ='" + rol.id + "'";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             ps.setString(1, rol.getRol());
@@ -155,10 +158,7 @@ public class RolDAO{
         } catch (SQLException ex){
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }
     
     public int eliminar(String id) {
@@ -167,7 +167,9 @@ public class RolDAO{
             //Codigo SQL para insertar borrar registro
             String sql = "DELETE FROM rol WHERE id ='"+ id +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
             ps = con.prepareStatement(sql);
 
             rows = ps.executeUpdate();        
@@ -176,9 +178,6 @@ public class RolDAO{
         } catch (SQLException ex){
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }    
 }

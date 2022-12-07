@@ -6,66 +6,30 @@
 package Config;
 
 import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 /**
  *
  * @author PC
  */
 public class Conexion {
-    private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    //El puerto es opcional
-    private static String JDBC_URL = "jdbc:mysql://localhost:3306/biblioteca?useSSL=false";
-    private static String JDBC_USER = "root";
-    private static String JDBC_PASS = "";
-    private static Driver driver = null;
-    
-    public static synchronized Connection getConnection() throws SQLException { 
-        if(driver == null) {
-            try {
-                Class jdbcDriverClass = Class.forName(JDBC_DRIVER);
-                driver = (Driver)jdbcDriverClass.newInstance();
-                DriverManager.registerDriver(driver);
-            } catch (Exception e) {
-                System.err.println("La conexión fallo: No se pudo cargar el Driver JDBC");
-                e.printStackTrace();
-            }
-        }
-        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
-    }
-    
-    public static void close(ResultSet rs){
+    private static Connection connection = null;
+    static{
         try {
-            if(rs != null){
-                rs.close();
-            }
-        } catch (Exception e) {
+            Context context = new InitialContext();
+            DataSource ds = (DataSource)context.lookup("java:/comp/env/jdbc/DataDB");
+            connection = ds.getConnection();            
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }
     
-    //Cierre del PrepareStatement
-    public static void close(PreparedStatement stmt) {
-        try {
-            if (stmt != null) {
-                stmt.close();
-            }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-    
-    public static void close(Connection conn) {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
+    public static Connection getConnection(){
+        return connection;
     }
 }

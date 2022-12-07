@@ -30,7 +30,7 @@
                         <th>Nickname</th>
                         <th>Email</th>
                         <th>Mora</th>
-                        <th>Fecha Nacimiento</th>
+                        <th>F. Nacimiento(Día/Mes/Año)</th>
                         <th>Rol</th>
                         <th>Acciones</th>
                     </tr>

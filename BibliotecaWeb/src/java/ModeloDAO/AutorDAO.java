@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author Eduardo Trujillo
  */
 public class AutorDAO{
-    Connection con;
+    Connection con = null;
     PreparedStatement ps;
     ResultSet rs;
     int rows = 0;
@@ -34,7 +34,10 @@ public class AutorDAO{
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT id, nombre_autor FROM autores";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -49,9 +52,6 @@ public class AutorDAO{
         } catch (SQLException ex){
             Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         } 
     }
 
@@ -61,7 +61,10 @@ public class AutorDAO{
                 //Codigo SQL para insertar registro a tabla
             String sql = "INSERT INTO `autores`(nombre_autor) VALUES(?)";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             ps.setString(1, autor.getNombre_autor());
@@ -72,10 +75,7 @@ public class AutorDAO{
         } catch (SQLException ex){
             Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }    
     
     public boolean autorExiste(String nombre) throws SQLException{
@@ -84,7 +84,10 @@ public class AutorDAO{
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT * FROM autores WHERE nombre_autor ='"+ nombre +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -94,9 +97,6 @@ public class AutorDAO{
             
         } catch (SQLException ex){
             Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         }
         
         return false;
@@ -107,7 +107,10 @@ public class AutorDAO{
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT id, nombre_autor FROM autores WHERE id ='"+ id +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             rs = ps.executeQuery();
@@ -124,9 +127,6 @@ public class AutorDAO{
         } catch (SQLException ex){
             Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         }
     }
 
@@ -136,7 +136,10 @@ public class AutorDAO{
                 //Codigo SQL para insertar registro a tabla
             String sql = "UPDATE autores SET nombre_autor = ? WHERE id ='" + autor.id + "'";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             ps.setString(1, autor.getNombre_autor());
@@ -147,10 +150,7 @@ public class AutorDAO{
         } catch (SQLException ex){
             Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }
     
     public int eliminar(String id) {
@@ -159,7 +159,10 @@ public class AutorDAO{
             //Codigo SQL para insertar borrar registro
             String sql = "DELETE FROM autores WHERE id ='"+ id +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
 
             rows = ps.executeUpdate();        
@@ -168,9 +171,6 @@ public class AutorDAO{
         } catch (SQLException ex){
             Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }    
 }
