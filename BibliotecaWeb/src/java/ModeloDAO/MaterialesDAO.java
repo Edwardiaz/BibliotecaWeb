@@ -31,7 +31,7 @@ public class MaterialesDAO {
                 +"materiales.id, materiales.titulo,autores.nombre_autor AS Autor, "
                 +"materiales.numero_de_paginas, editoriales.nombre_editorial AS "
                 +"Editorial, materiales.isbn, materiales.periodicidad, "
-                +"date_format(materiales.fecha_publicacion, \"%d/%m/%Y\"), "
+                +"date_format(materiales.fecha_publicacion, '%d/%m/%Y\') "
                 +"AS fecha, materiales.ubicacion, materiales.nombre_autor_cv, "
                 +"artistas.nombre_artista AS Artista, materiales.duracion, "
                 +"materiales.numero_de_canciones,materiales.unidades_disponibles, "
@@ -54,18 +54,18 @@ public class MaterialesDAO {
                 Materiales materiales = new Materiales();
                 materiales.setId(rs.getString("id"));
                 materiales.setTitulo(rs.getString("titulo"));
-                materiales.setTipoMaterial(rs.getString("tipo_material"));
+                materiales.setTipoMaterial(rs.getString("Tipo"));
                 materiales.setAutor(rs.getString("Autor"));
                 materiales.setNumeroDePaginas(rs.getString("numero_de_paginas"));
-                materiales.setEditorial(rs.getString("editoriales"));
+                materiales.setEditorial(rs.getString("Editorial"));
                 materiales.setIsbn(rs.getString("isbn"));
                 materiales.setPeriodicidad(rs.getString("periodicidad"));
-                materiales.setFechaPublicacion(rs.getDate("fecha"));
-                materiales.setArtista(rs.getString("artistas"));
-                materiales.setGenero(rs.getString("generos"));
+                materiales.setFechaPublicacion(rs.getString("fecha"));
+                materiales.setArtista(rs.getString("Artista"));
+                materiales.setGenero(rs.getString("Genero"));
                 materiales.setDuracion(rs.getString("duracion"));
                 materiales.setNumeroDeCanciones(rs.getString("numero_de_canciones"));
-                materiales.setDirector(rs.getString("directores"));
+                materiales.setDirector(rs.getString("Director"));
                 materiales.setUbicacion(rs.getString("ubicacion"));
                 materiales.setNombre_autor_CV(rs.getString("nombre_autor_cv"));
                 materiales.setUnidadesDisponibles(rs.getInt("unidades_disponibles"));
@@ -89,7 +89,13 @@ public class MaterialesDAO {
         try {
             rows = 0;
                 //Codigo SQL para insertar registro a tabla
-            String sql = "INSERT INTO `materiales`(rol, numero_prestamos, dias_prestamo) VALUES(?,?,?)";
+            String sql = "INSERT INTO materiales" +
+                    "(id, titulo, codigo_tipo_material, codigo_autor, "
+                    + "numero_de_paginas, codigo_editorial, isbn, periodicidad,"
+                    + "fecha_publicacion, codigo_artista, codigo_genero, "
+                    + "duracion, numero_de_canciones, codigo_director, "
+                    + "ubicacion, nombre_autor_CV, unidades_disponibles) " 
+                    + "VALUES(?,?,4,?,?,?,?,?,?,?)";
         
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);
@@ -140,7 +146,7 @@ public class MaterialesDAO {
             ps.setString(index++, materiales.getNumeroDePaginas());
             ps.setInt(index++, editorialID);
             ps.setString(index++, materiales.getIsbn());
-            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
             ps.setString(index++, materiales.getUbicacion());
 
@@ -171,7 +177,7 @@ public class MaterialesDAO {
             ps.setString(index++, materiales.getNumeroDePaginas());
             ps.setString(index++, materiales.getUbicacion());
             ps.setString(index++, materiales.getNombre_autor_CV());
-            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
             rows = ps.executeUpdate();
         }catch(SQLException e){
@@ -197,7 +203,7 @@ public class MaterialesDAO {
             int index = 1;
             ps.setString(index++, crearID("CDA"));
             ps.setString(index++, materiales.getTitulo());
-            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, idArtista);
             ps.setInt(index++, idGenero);
             ps.setString(index++, materiales.getDuracion());
@@ -233,7 +239,7 @@ public class MaterialesDAO {
             ps.setInt(index++, idDirector);
             ps.setInt(index++, idGenero);
             ps.setString(index, materiales.getDuracion());
-            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
             ps.setString(index++, materiales.getUbicacion());
             rows = ps.executeUpdate();
@@ -260,7 +266,7 @@ public class MaterialesDAO {
             ps.setString(index++, materiales.getTitulo());
             ps.setInt(index++, idEditorial);
             ps.setString(index++, materiales.getPeriodicidad());
-            ps.setDate(index++, materiales.getFechaPublicacion());
+            ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
             ps.setString(index++, materiales.getUbicacion());
             rows = ps.executeUpdate();
@@ -539,7 +545,7 @@ public class MaterialesDAO {
                 materiales.setEditorial(rs.getString("editoriales"));
                 materiales.setIsbn(rs.getString("isbn"));
                 materiales.setPeriodicidad(rs.getString("periodicidad"));
-                materiales.setFechaPublicacion(rs.getDate("fecha"));
+                materiales.setFechaPublicacion(rs.getString("fecha"));
                 materiales.setArtista(rs.getString("artistas"));
                 materiales.setGenero(rs.getString("generos"));
                 materiales.setDuracion(rs.getString("duracion"));
@@ -594,7 +600,7 @@ public class MaterialesDAO {
             ps.setInt(5, editorialID);
             ps.setString(6, material.getIsbn());
             ps.setString(7, material.getPeriodicidad());
-            ps.setDate(8, material.getFechaPublicacion());
+            ps.setString(8, material.getFechaPublicacion());
             ps.setInt(9, idArtista);
             ps.setInt(10, idGenero);
             ps.setString(11, material.getDuracion());
