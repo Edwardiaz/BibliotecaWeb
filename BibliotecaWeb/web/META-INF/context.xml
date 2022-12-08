@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context>
+<Context path="/BibliotecaWeb">
     path="/BibliotecaWeb"
 
-    <Resource
-        name="jdbc/DataDB"
-        auth="Container"
-        type="javax.sql.DataSource"
-        maxActive="100"
-        maxIdle="30"
-        maxWait="10000"
-        driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/biblioteca?useSSL=false"
-        username="root"
-        password=""
-    />
+    <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/DataDB" password="" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/biblioteca?useSSL=false" username="root"/>
 </Context>

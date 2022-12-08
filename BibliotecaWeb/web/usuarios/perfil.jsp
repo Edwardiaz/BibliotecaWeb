@@ -69,11 +69,8 @@
                         </div>
                     </div>
                     <div class="row col-12 mr-0 pr-0">
-                        <div class="col-6  form-group text-left pl-0 ml-0">
-                            <a class="btn btn-info w-50" href="${contextPath}/UsuarioControlador?accion=listar">Regresar a Lista</a>
-                        </div>
-                        <div class="col-6  form-group text-right pr-0 mr-0">
-                            <input type="submit" class="btn btn-success w-50" name="accion" value="Actualizar Perfil">
+                        <div class="col-12  form-group text-right">
+                            <input type="submit" class="btn btn-success w-25" name="accion" value="Actualizar Perfil">
                         </div>                                
                     </div>                              
                 </form>           
