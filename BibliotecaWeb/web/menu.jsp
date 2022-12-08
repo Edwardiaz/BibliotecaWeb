@@ -27,6 +27,8 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="${contextPath}/RolControlador?accion=listar">Roles</a>
             <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="${contextPath}/MaterialControlador?accion=listar">Materiales</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="${contextPath}/ArtistaControlador?accion=listar">Artistas</a>
             <a class="dropdown-item" href="${contextPath}/AutorControlador?accion=listar">Autores</a>
             <a class="dropdown-item" href="${contextPath}/DirectorControlador?accion=listar">Directores</a>

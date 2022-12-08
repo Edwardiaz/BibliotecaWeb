@@ -14,7 +14,7 @@ public class Materiales {
     private String numeroDePaginas;
     private String isbn;
     private String periodicidad;
-    private Date fechaPublicacion;
+    private String fechaPublicacion;
     private String duracion;
     private String numeroDeCanciones;
     private Integer unidadesDisponibles;
@@ -41,7 +41,7 @@ public class Materiales {
         this.titulo = titulo;
     }
     
-    public Materiales(String id, String titulo, String numeroDePaginas, String isbn, String periodicidad, Date fechaPublicacion, String duracion, String numeroDeCanciones, Integer unidadesDisponibles, String codigoArtista, String codigoAutor, String codigoDirector, String ubicacion, String nombre_autor_CV, String codigoEditorial, String codigoGenero, String codigoTipoMaterial) {
+    public Materiales(String id, String titulo, String numeroDePaginas, String isbn, String periodicidad, String fechaPublicacion, String duracion, String numeroDeCanciones, Integer unidadesDisponibles, String codigoArtista, String codigoAutor, String codigoDirector, String ubicacion, String nombre_autor_CV, String codigoEditorial, String codigoGenero, String codigoTipoMaterial) {
         this.id = id;
         this.titulo = titulo;
         this.numeroDePaginas = numeroDePaginas;
@@ -101,11 +101,11 @@ public class Materiales {
         this.periodicidad = periodicidad;
     }
 
-    public Date getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
