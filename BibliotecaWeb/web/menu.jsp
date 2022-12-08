@@ -45,8 +45,16 @@
           </div>
         </li>
       </c:if>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Consultas</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Consultas
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<!--            <div class="dropdown-divider"></div>-->
+            <a class="dropdown-item" href="${contextPath}/MaterialControlador?accion=consulta">Materiales</a>
+<!--            <div class="dropdown-divider"></div>-->
+          </div>
       </li>
     </ul>
         <c:if test="${rolUsuario == null}">

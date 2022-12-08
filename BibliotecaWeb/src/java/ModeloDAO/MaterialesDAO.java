@@ -566,6 +566,80 @@ public class MaterialesDAO {
             Conexion.close(conn);
         }
     }
+    
+    /**
+     * 
+     * Metodo para hacer una consulta sin tener que cargar los registros de 
+     * materiales de una sola vez, sino al hacer una busqueda individual por
+     * titulo
+     * 
+     **/
+    public Materiales consulta(String titulo) {
+        try{
+            String sql = "SELECT "
+                +"materiales.id, materiales.titulo,autores.nombre_autor AS Autor, "
+                +"materiales.numero_de_paginas, editoriales.nombre_editorial AS "
+                +"Editorial, materiales.isbn, materiales.periodicidad, "
+                +"date_format(materiales.fecha_publicacion, \"%d/%m/%Y\"), "
+                +"AS fecha, materiales.ubicacion, materiales.nombre_autor_cv, "
+                +"artistas.nombre_artista AS Artista, materiales.duracion, "
+                +"materiales.numero_de_canciones,materiales.unidades_disponibles, "
+                +"directores.nombre_director as Director, materiales.duracion, "
+                +"generos.nombre_genero AS Genero,tipo_material.tipo_material "
+                +"AS Tipo from materiales LEFT JOIN directores on "
+                +"directores.id = materiales.codigo_director LEFT JOIN generos "
+                +"ON generos.id = materiales.codigo_genero LEFT JOIN "
+                +"tipo_material ON tipo_material.id = "
+                +"materiales.codigo_tipo_material LEFT JOIN "
+                +"autores on autores.id = materiales.codigo_autor LEFT JOIN "
+                +"artistas ON artistas.id = materiales.codigo_artista LEFT JOIN "
+                +"editoriales ON editoriales.id = materiales.codigo_editorial  "
+                + "WHERE materiales.titulo like '%"+ titulo +"%'";
+
+            conn = Conexion.getConnection();
+            ps = conn.prepareStatement(sql);
+            
+            rs = ps.executeQuery();
+            
+            Materiales materiales = new Materiales();
+            
+            if(rs.next()) {
+               /* rol.setId(rs.getInt("id"));
+                rol.setRol(rs.getString("rol"));
+                rol.setNumero_prestamos(rs.getInt("numero_prestamos"));
+                rol.setDias_prestamo(rs.getInt("dias_prestamo"));*/
+               
+                materiales.setId(rs.getString("id"));
+                materiales.setTitulo(rs.getString("titulo"));
+                materiales.setTipoMaterial(rs.getString("tipo_material"));
+                materiales.setAutor(rs.getString("Autor"));
+                materiales.setNumeroDePaginas(rs.getString("numero_de_paginas"));
+                materiales.setEditorial(rs.getString("editoriales"));
+                materiales.setIsbn(rs.getString("isbn"));
+                materiales.setPeriodicidad(rs.getString("periodicidad"));
+                materiales.setFechaPublicacion(rs.getString("fecha"));
+                materiales.setArtista(rs.getString("artistas"));
+                materiales.setGenero(rs.getString("generos"));
+                materiales.setDuracion(rs.getString("duracion"));
+                materiales.setNumeroDeCanciones(rs.getString("numero_de_canciones"));
+                materiales.setDirector(rs.getString("directores"));
+                materiales.setUbicacion(rs.getString("ubicacion"));
+                materiales.setNombre_autor_CV(rs.getString("nombre_autor_cv"));
+                materiales.setUnidadesDisponibles(rs.getInt("unidades_disponibles"));
+            }
+            
+            return materiales;
+            
+        } catch (SQLException ex){
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            Conexion.close(ps);
+            Conexion.close(conn);
+        }
+    }
+    
+    /*****/
 
     public int actualizar(Materiales material) throws SQLException{
         try {

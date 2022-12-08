@@ -27,13 +27,14 @@ import javax.servlet.http.HttpServletResponse;
 public class MaterialControlador extends HttpServlet{
     String listar = "materiales/listar.jsp";
     String agregar = "materiales/agregar.jsp";
-    String agregarDVD = "materiales/agregarDVD.jsp";
-    String agregarRev = "materiales/agregarRevista.jsp";
-    String agregarObra = "materiales/agregarObra.jsp";
-    String agregarCDA = "materiales/agregarCDA.jsp";
-    String agregarTesis = "materiales/agregarTesis.jsp";
+//    String agregarDVD = "materiales/agregarDVD.jsp";
+//    String agregarRev = "materiales/agregarRevista.jsp";
+//    String agregarObra = "materiales/agregarObra.jsp";
+//    String agregarCDA = "materiales/agregarCDA.jsp";
+//    String agregarTesis = "materiales/agregarTesis.jsp";
     String editar = "materiales/editar.jsp";
     String eliminar = "materiales/eliminar.jsp";
+    String consulta = "materiales/consulta.jsp";
     
     Materiales material = new Materiales();
     MaterialesDAO materialDao = new MaterialesDAO();
@@ -84,6 +85,10 @@ public class MaterialControlador extends HttpServlet{
             acceso = listar;
             RequestDispatcher vista = request.getRequestDispatcher(acceso);
             vista.forward(request, response);            
+        }else if(action.equalsIgnoreCase("consulta")){
+            acceso = consulta;
+            RequestDispatcher vista = request.getRequestDispatcher(acceso);
+            vista.forward(request, response);         
         }else if(action.equals("add")){
             acceso = agregar;
             RequestDispatcher vista = request.getRequestDispatcher(acceso);
@@ -191,7 +196,7 @@ public class MaterialControlador extends HttpServlet{
                 
                 //material.setId(request.getParameter("id"));
                 material.setTitulo(request.getParameter("titulo"));
-                //material.setTipoMaterial(request.getParameter("tipo_material"));
+                material.setTipoMaterial(request.getParameter("tipo_material"));
                 material.setAutor(request.getParameter("Autor"));
                 material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
                 material.setEditorial(request.getParameter("editoriales"));
@@ -269,19 +274,31 @@ public class MaterialControlador extends HttpServlet{
                     RequestDispatcher vista = request.getRequestDispatcher(acceso);
                     vista.forward(request, response);                    
                 } else {
-                    if (materialDao.insertarLibros(material, 1) > 0) {
-                        request.getSession().setAttribute("exito", "Usuario agregado exitosamente!");
-                        response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
-                        //acceso = listar;
+                    if(material.getTipoMaterial().equalsIgnoreCase("Libro")){
+                        if (materialDao.insertarLibros(material, 1) > 0) {
+                            request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                            response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                            //acceso = listar;
+                        } else {
+                            request.getSession().setAttribute("error", "El material no ha podido ser agregado!");
+                            response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                            //acceso = listar;
+                        }
                     } else {
-                        request.getSession().setAttribute("error", "El usuario no ha podido ser agregado!");
-                        response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
-                        //acceso = listar;
+                        if (materialDao.insertarLibros(material, 0) > 0) {
+                            request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                            response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                            //acceso = listar;
+                        } else {
+                            request.getSession().setAttribute("error", "El material no ha podido ser agregado!");
+                            response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                            //acceso = listar;
+                        }
                     }
                 }
             } catch (SQLException ex) {
                Logger.getLogger(MaterialControlador.class.getName()).log(Level.SEVERE, null, ex);
-           }
+            }
         }else if(action.equals("AgregarCV")){
             try {
                 listaErrores.clear();
