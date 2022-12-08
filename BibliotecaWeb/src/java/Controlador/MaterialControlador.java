@@ -173,12 +173,12 @@ public class MaterialControlador extends HttpServlet{
                     vista.forward(request, response);                    
                 } else {
                     if (materialDao.agregar(material) > 0) {
-                        request.getSession().setAttribute("exito", "Usuario agregado exitosamente!");
-                        response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
+                        request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
                         //acceso = listar;
                     } else {
-                        request.getSession().setAttribute("error", "El usuario no ha podido ser agregado!");
-                        response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
+                        request.getSession().setAttribute("error", "El Material no ha podido ser agregado!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
                         //acceso = listar;
                     }
                 }
@@ -276,6 +276,394 @@ public class MaterialControlador extends HttpServlet{
                     } else {
                         request.getSession().setAttribute("error", "El usuario no ha podido ser agregado!");
                         response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
+                        //acceso = listar;
+                    }
+                }
+            } catch (SQLException ex) {
+               Logger.getLogger(MaterialControlador.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }else if(action.equals("AgregarCV")){
+            try {
+                listaErrores.clear();
+                
+                //material.setId(request.getParameter("id"));
+                material.setTitulo(request.getParameter("titulo"));
+                //material.setTipoMaterial(request.getParameter("tipo_material"));
+                //material.setAutor(request.getParameter("Autor"));
+                material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
+                //material.setEditorial(request.getParameter("editoriales"));
+                //material.setIsbn(request.getParameter("isbn"));
+                //material.setPeriodicidad(request.getParameter("periodicidad"));
+                material.setFechaPublicacion(request.getParameter("fecha"));
+                //material.setArtista(request.getParameter("artistas"));
+                //material.setGenero(request.getParameter("generos"));
+                //material.setDuracion(request.getParameter("duracion"));
+                //material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
+                //material.setDirector(request.getParameter("directores"));
+                material.setUbicacion(request.getParameter("ubicacion"));
+                material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
+                material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
+
+                if (Validaciones.isEmpty(material.getTitulo())) {
+                    listaErrores.add("Campo Titulo obligatorio");
+                }            
+//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
+//                    listaErrores.add("Campo Tipo Material es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getAutor())) {
+//                    listaErrores.add("Campo Autor es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
+                    listaErrores.add("Campo numero de páginas es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getEditorial())) {
+//                    listaErrores.add("Campo Editorial es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getIsbn())) {
+//                    listaErrores.add("Campo ISBN es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
+//                    listaErrores.add("Campo Periodicidad es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+                    listaErrores.add("Campo Fecha Publicación es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getArtista())) {
+//                    listaErrores.add("Campo Artista es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getGenero())) {
+//                    listaErrores.add("Campo Genero es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getDuracion())) {
+//                    listaErrores.add("Campo Duración es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
+//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getDirector())) {
+//                    listaErrores.add("Campo Director es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getUbicacion())) {
+                    listaErrores.add("Campo Ubicación es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
+                    listaErrores.add("Campo Autor de CV es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
+                    listaErrores.add("Campo Unidades Disponibles es obligatorio");
+                }
+                
+                if (listaErrores.size() > 0) {
+                    request.setAttribute("listaErrores", listaErrores);
+                    request.setAttribute("Material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else if (materialDao.materialExiste(material.getTitulo())) {
+                    request.getSession().setAttribute("existe", "¡El material ya existe!");
+                    request.setAttribute("material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else {
+                    if (materialDao.insertarCV(material) > 0) {
+                        request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    } else {
+                        request.getSession().setAttribute("error", "El material no ha podido ser agregado!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    }
+                }
+            } catch (SQLException ex) {
+               Logger.getLogger(MaterialControlador.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }else if(action.equals("AgregarCD")){
+            try {
+                listaErrores.clear();
+                
+                //material.setId(request.getParameter("id"));
+                material.setTitulo(request.getParameter("titulo"));
+                //material.setTipoMaterial(request.getParameter("tipo_material"));
+//                material.setAutor(request.getParameter("Autor"));
+//                material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
+//                material.setEditorial(request.getParameter("editoriales"));
+//                material.setIsbn(request.getParameter("isbn"));
+//                material.setPeriodicidad(request.getParameter("periodicidad"));
+                material.setFechaPublicacion(request.getParameter("fecha"));
+                material.setArtista(request.getParameter("artistas"));
+                material.setGenero(request.getParameter("generos"));
+                material.setDuracion(request.getParameter("duracion"));
+                material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
+                //material.setDirector(request.getParameter("directores"));
+                material.setUbicacion(request.getParameter("ubicacion"));
+                //material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
+                material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
+
+                if (Validaciones.isEmpty(material.getTitulo())) {
+                    listaErrores.add("Campo Titulo obligatorio");
+                }            
+//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
+//                    listaErrores.add("Campo Tipo Material es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getAutor())) {
+//                    listaErrores.add("Campo Autor es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
+//                    listaErrores.add("Campo numero de páginas es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getEditorial())) {
+//                    listaErrores.add("Campo Editorial es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getIsbn())) {
+//                    listaErrores.add("Campo ISBN es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
+//                    listaErrores.add("Campo Periodicidad es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+                    listaErrores.add("Campo Fecha Publicación es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getArtista())) {
+                    listaErrores.add("Campo Artista es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getGenero())) {
+                    listaErrores.add("Campo Genero es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getDuracion())) {
+                    listaErrores.add("Campo Duración es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
+                    listaErrores.add("Campo Numero de Canciones es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getDirector())) {
+//                    listaErrores.add("Campo Director es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getUbicacion())) {
+                    listaErrores.add("Campo Ubicación es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
+//                    listaErrores.add("Campo Autor de CV es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
+                    listaErrores.add("Campo Unidades Disponibles es obligatorio");
+                }
+                
+                if (listaErrores.size() > 0) {
+                    request.setAttribute("listaErrores", listaErrores);
+                    request.setAttribute("Material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else if (materialDao.materialExiste(material.getTitulo())) {
+                    request.getSession().setAttribute("existe", "¡El material ya existe!");
+                    request.setAttribute("material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else {
+                    if (materialDao.agregar(material) > 0) {
+                        request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    } else {
+                        request.getSession().setAttribute("error", "El Material no ha podido ser agregado!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    }
+                }
+            } catch (SQLException ex) {
+               Logger.getLogger(MaterialControlador.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }else if(action.equals("AgregarDVD")){
+            try {
+                listaErrores.clear();
+                
+                //material.setId(request.getParameter("id"));
+                material.setTitulo(request.getParameter("titulo"));
+                //material.setTipoMaterial(request.getParameter("tipo_material"));
+                //material.setAutor(request.getParameter("Autor"));
+                //material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
+//                material.setEditorial(request.getParameter("editoriales"));
+//                material.setIsbn(request.getParameter("isbn"));
+//                material.setPeriodicidad(request.getParameter("periodicidad"));
+                material.setFechaPublicacion(request.getParameter("fecha"));
+                //material.setArtista(request.getParameter("artistas"));
+                material.setGenero(request.getParameter("generos"));
+                material.setDuracion(request.getParameter("duracion"));
+                //material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
+                material.setDirector(request.getParameter("directores"));
+                material.setUbicacion(request.getParameter("ubicacion"));
+                //material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
+                material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
+
+                if (Validaciones.isEmpty(material.getTitulo())) {
+                    listaErrores.add("Campo Titulo obligatorio");
+                }            
+//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
+//                    listaErrores.add("Campo Tipo Material es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getAutor())) {
+//                    listaErrores.add("Campo Autor es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
+//                    listaErrores.add("Campo numero de páginas es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getEditorial())) {
+//                    listaErrores.add("Campo Editorial es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getIsbn())) {
+//                    listaErrores.add("Campo ISBN es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
+//                    listaErrores.add("Campo Periodicidad es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+                    listaErrores.add("Campo Fecha Publicación es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getArtista())) {
+//                    listaErrores.add("Campo Artista es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getGenero())) {
+                    listaErrores.add("Campo Genero es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getDuracion())) {
+                    listaErrores.add("Campo Duración es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
+//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getDirector())) {
+                    listaErrores.add("Campo Director es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getUbicacion())) {
+                    listaErrores.add("Campo Ubicación es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
+//                    listaErrores.add("Campo Autor de CV es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
+                    listaErrores.add("Campo Unidades Disponibles es obligatorio");
+                }
+                
+                if (listaErrores.size() > 0) {
+                    request.setAttribute("listaErrores", listaErrores);
+                    request.setAttribute("Material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else if (materialDao.materialExiste(material.getTitulo())) {
+                    request.getSession().setAttribute("existe", "¡El material ya existe!");
+                    request.setAttribute("material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else {
+                    if (materialDao.agregar(material) > 0) {
+                        request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    } else {
+                        request.getSession().setAttribute("error", "El Material no ha podido ser agregado!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    }
+                }
+            } catch (SQLException ex) {
+               Logger.getLogger(MaterialControlador.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }else if(action.equals("AgregarRevista")){
+            try {
+                listaErrores.clear();
+                
+                //material.setId(request.getParameter("id"));
+                material.setTitulo(request.getParameter("titulo"));
+                //material.setTipoMaterial(request.getParameter("tipo_material"));
+                //material.setAutor(request.getParameter("Autor"));
+                //material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
+                material.setEditorial(request.getParameter("editoriales"));
+                //material.setIsbn(request.getParameter("isbn"));
+                material.setPeriodicidad(request.getParameter("periodicidad"));
+                material.setFechaPublicacion(request.getParameter("fecha"));
+//                material.setArtista(request.getParameter("artistas"));
+//                material.setGenero(request.getParameter("generos"));
+//                material.setDuracion(request.getParameter("duracion"));
+//                material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
+//                material.setDirector(request.getParameter("directores"));
+                material.setUbicacion(request.getParameter("ubicacion"));
+                //material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
+                material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
+
+                if (Validaciones.isEmpty(material.getTitulo())) {
+                    listaErrores.add("Campo Titulo obligatorio");
+                }            
+//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
+//                    listaErrores.add("Campo Tipo Material es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getAutor())) {
+//                    listaErrores.add("Campo Autor es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
+//                    listaErrores.add("Campo numero de páginas es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getEditorial())) {
+                    listaErrores.add("Campo Editorial es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getIsbn())) {
+//                    listaErrores.add("Campo ISBN es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getPeriodicidad())) {
+                    listaErrores.add("Campo Periodicidad es obligatorio");
+                }
+                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+                    listaErrores.add("Campo Fecha Publicación es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getArtista())) {
+//                    listaErrores.add("Campo Artista es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getGenero())) {
+//                    listaErrores.add("Campo Genero es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getDuracion())) {
+//                    listaErrores.add("Campo Duración es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
+//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
+//                }
+//                if (Validaciones.isEmpty(material.getDirector())) {
+//                    listaErrores.add("Campo Director es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getUbicacion())) {
+                    listaErrores.add("Campo Ubicación es obligatorio");
+                }
+//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
+//                    listaErrores.add("Campo Autor de CV es obligatorio");
+//                }
+                if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
+                    listaErrores.add("Campo Unidades Disponibles es obligatorio");
+                }
+                
+                if (listaErrores.size() > 0) {
+                    request.setAttribute("listaErrores", listaErrores);
+                    request.setAttribute("Material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else if (materialDao.materialExiste(material.getTitulo())) {
+                    request.getSession().setAttribute("existe", "¡El material ya existe!");
+                    request.setAttribute("material", material);
+                    acceso = agregar;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else {
+                    if (materialDao.agregar(material) > 0) {
+                        request.getSession().setAttribute("exito", "Material agregado exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
+                        //acceso = listar;
+                    } else {
+                        request.getSession().setAttribute("error", "El Material no ha podido ser agregado!");
+                        response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
                         //acceso = listar;
                     }
                 }
