@@ -57,9 +57,9 @@
         <c:if test="${rolUsuario != null}">
             <ul class="navbar-nav mr-5">
                 <li class="nav-item mr-5">
-                  <a class="nav-link" href="${contextPath}/LoginControlador?accion=logout">Hola ${nombreUsuario}!</a>
+                  <a class="nav-link" href="${contextPath}/UsuarioControlador?accion=perfil">Hola ${nombreUsuario}!</a>
                 </li>                 
-                <li class="nav-item">
+                <li class="nav-item ">
                   <a class="nav-link" href="${contextPath}/LoginControlador?accion=logout">Salir</a>
                 </li>            
             </ul>

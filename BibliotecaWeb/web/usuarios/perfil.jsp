@@ -21,7 +21,7 @@
     <body>
         <jsp:include page="/menu.jsp"/>
         <div class="container-fluid">
-        <h1>Creacion de Nuevo Usuario</h1>
+        <h1>Perfil de Usuario</h1>
             <div class="col-6">
                 <c:if test="${not empty listaErrores}">
                 <div class="alert alert-danger">
@@ -61,43 +61,18 @@
                     <div class="row">
                         <div class="col-6 form-group">
                             <label>Fecha de Nacimiento(Mes/Día/Año)</label>
-                            <input type="date" name="txtFechaNacimiento" class="form-control" value="${usuario.fecha_nacimiento}" placeholder="Ingrese fecha de nacimiento de usuario"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            <input type="date" name="txtFechaNacimiento" class="form-control" value="${usuario.fecha_nacimiento }" placeholder="Ingrese fecha de nacimiento de usuario"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
                         <div class="col-6 form-group">
                             <label>Contraseña</label>
                             <input type="password" name="txtPass" class="form-control" value="${usuario.pass}" placeholder="Ingrese contraseña"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                    </div>                     
-                    <div class="row">
-                        <div class="col-6 form-group">
-                            <label>Mora</label>
-                            <input type="currency" name="txtMora" class="form-control" placeholder="Ingrese mora de usuario" value="0.0"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>                        
-                        <div class="col-6 form-group">
-                            <label for="exampleFormControlSelect1">Seleccione rol</label>
-                            <select name="txtRol" class="form-control" id="exampleFormControlSelect1" value="${usuario.rol}">
-                                <option value=""> - Seleccione un rol del listado - </option>
-                                <%
-                                    RolDAO dao = new RolDAO();
-                                    List<Rol> list = dao.listar();
-                                    Iterator<Rol> iter = list.iterator();
-                                    Rol rol = null;
-                                    while(iter.hasNext()){
-                                        rol = iter.next();
-                                %>
-                                <option value="<%= rol.getId() %>"><%= rol.getRol() %></option>
-                                <%}%>
-                            </select><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>                            
                     </div>
-                        <div class="row col-12 mr-0 pr-0">
-                            <div class="col-6  form-group text-left pl-0 ml-0">
-                                <a class="btn btn-info w-50" href="${contextPath}/UsuarioControlador?accion=listar">Regresar a Lista</a>
-                            </div>
-                            <div class="col-6  form-group text-right pr-0 mr-0">
-                                <input type="submit" class="btn btn-success w-50" name="accion" value="Agregar">
-                            </div>                                
-                        </div>                              
+                    <div class="row col-12 mr-0 pr-0">
+                        <div class="col-12  form-group text-right">
+                            <input type="submit" class="btn btn-success w-25" name="accion" value="Actualizar Perfil">
+                        </div>                                
+                    </div>                              
                 </form>           
             </div>
         </div>
