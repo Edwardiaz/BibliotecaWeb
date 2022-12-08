@@ -21,6 +21,10 @@
         <servlet-class>Controlador.ArtistaControlador</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>MaterialControlador</servlet-name>
+        <servlet-class>Controlador.MaterialControlador</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>DirectorControlador</servlet-name>
         <servlet-class>Controlador.DirectorControlador</servlet-class>
     </servlet>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>RolControlador</servlet-name>
         <url-pattern>/RolControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaterialControlador</servlet-name>
+        <url-pattern>/MaterialControlador</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AutorControlador</servlet-name>
