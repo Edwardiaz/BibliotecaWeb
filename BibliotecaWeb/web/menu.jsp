@@ -46,7 +46,7 @@
         </li>
       </c:if>
       <li class="nav-item">
-        <a class="nav-link" href="${contextPath}/ConsultasControlador?accion=Consultas">Consultas</a>
+        <a class="nav-link" href="#">Consultas</a>
       </li>
     </ul>
         <c:if test="${rolUsuario == null}">
