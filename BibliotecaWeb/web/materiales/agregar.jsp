@@ -75,22 +75,24 @@
                             <label>Titulo</label>
                             <input type="text" name="titulo" class="form-control" value="${materiales.titulo}" placeholder="Ingrese titulo del material"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div class="col-6 form-group">
-                            <label for="exampleFormControlSelect2">Seleccione un Autor</label>
-                            <select name="Autor" class="form-control" id="exampleFormControlSelect2" value="${materiales.autor}">
-                                <option value=""> -Seleccione una opción del listado- </option>
-                                <%
-                                    AutorDAO autorDao = new AutorDAO();
-                                    List<Autor> list2 = autorDao.listar();
-                                    Iterator<Autor> iter2 = list2.iterator();
-                                    Autor autor = null;
-                                    while(iter2.hasNext()){
-                                        autor = iter2.next();
-                                %>
-                                <option value="<%= autor.getId() %>"><%= autor.getNombre_autor()%></option>
-                                <%}%>
-                            </select><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                        </div>                      
+                        <c:if test="${materiales.tipoMaterial != 'Libro'}">
+                            <div class="col-6 form-group">
+                                <label for="exampleFormControlSelect2">Seleccione un Autor</label>
+                                <select name="Autor" class="form-control" id="exampleFormControlSelect2" value="${materiales.autor}">
+                                    <option value=""> -Seleccione una opción del listado- </option>
+                                    <%
+                                        AutorDAO autorDao = new AutorDAO();
+                                        List<Autor> list2 = autorDao.listar();
+                                        Iterator<Autor> iter2 = list2.iterator();
+                                        Autor autor = null;
+                                        while(iter2.hasNext()){
+                                            autor = iter2.next();
+                                    %>
+                                    <option value="<%= autor.getId() %>"><%= autor.getNombre_autor()%></option>
+                                    <%}%>
+                                </select><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </c:if>
                     </div>
                     <div class="row">
                         <div class="col-6 form-group">
@@ -211,7 +213,7 @@
                             <a class="btn btn-info w-50" href="${contextPath}/MaterialControlador?accion=listar">Regresar a Lista</a>
                         </div>
                         <div class="col-6  form-group text-right pr-0 mr-0">
-                            <input type="submit" class="btn btn-success w-50" name="accion" value="Agregar">
+                            <input type="submit" class="btn btn-success w-50" name="accion" value="AgregarLibro">
                         </div>                                
                     </div>                              
                 </form>           
