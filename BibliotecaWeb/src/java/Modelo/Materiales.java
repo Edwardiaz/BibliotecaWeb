@@ -26,6 +26,8 @@ public class Materiales {
     private String editorial;
     private String genero;
     private String tipoMaterial;
+    private String Estado;
+
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoMaterial")
     private List<Prestamos> prestamosList;
 
@@ -41,7 +43,7 @@ public class Materiales {
         this.titulo = titulo;
     }
     
-    public Materiales(String id, String titulo, String numeroDePaginas, String isbn, String periodicidad, String fechaPublicacion, String duracion, String numeroDeCanciones, Integer unidadesDisponibles, String codigoArtista, String codigoAutor, String codigoDirector, String ubicacion, String nombre_autor_CV, String codigoEditorial, String codigoGenero, String codigoTipoMaterial) {
+    public Materiales(String id, String titulo, String numeroDePaginas, String isbn, String periodicidad, String fechaPublicacion, String duracion, String numeroDeCanciones, Integer unidadesDisponibles, String codigoArtista, String codigoAutor, String codigoDirector, String ubicacion, String nombre_autor_CV, String codigoEditorial, String codigoGenero, String codigoTipoMaterial, String codigoEstado) {
         this.id = id;
         this.titulo = titulo;
         this.numeroDePaginas = numeroDePaginas;
@@ -59,6 +61,7 @@ public class Materiales {
         this.editorial = codigoEditorial;
         this.genero = codigoGenero;
         this.tipoMaterial = codigoTipoMaterial;
+        this.Estado = codigoEstado;
     }
 
     public String getId() {
@@ -195,6 +198,14 @@ public class Materiales {
 
     public void setTipoMaterial(String tipoMaterial) {
         this.tipoMaterial = tipoMaterial;
+    }
+    
+        public String getEstado() {
+        return Estado;
+    }
+    
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
 
     public List<Prestamos> getPrestamosList() {

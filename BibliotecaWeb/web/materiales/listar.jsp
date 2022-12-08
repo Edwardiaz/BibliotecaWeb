@@ -42,6 +42,7 @@
                         <th>Autor Tesis</th>
                         <th>Unidades disponibles</th>
                         <th>Acciones</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +72,7 @@
                             <td><%= mat.getUbicacion()%></td>
                             <td><%= mat.getNombre_autor_CV()%></td>
                             <td><%= mat.getUnidadesDisponibles()%></td>
+                            <td><%= mat.getEstado()%></td>
                             <td>
                                 <a class="btn btn-sm btn-info" href="${contextPath}/MaterialControlador?accion=editar&id=<%= mat.getId()%>">Editar</a>
                                 <a class="btn btn-sm btn-danger" href="javascript:eliminar(<%= mat.getId()%>)">Eliminar</a>
