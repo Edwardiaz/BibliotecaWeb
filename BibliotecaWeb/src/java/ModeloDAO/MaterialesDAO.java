@@ -625,7 +625,7 @@ public class MaterialesDAO {
         try {
             int rows = 0;
             //Codigo SQL para insertar borrar registro
-            String sql = "DELETE FROM materiales WHERE id ='"+ id +"'";
+            String sql = "UPDATE `biblioteca_web`.`materiales` SET `isbn` = '0000000000000' WHERE (`id` = 'LIB00001');";
 
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);

@@ -72,11 +72,11 @@
                             <td><%= mat.getUbicacion()%></td>
                             <td><%= mat.getNombre_autor_CV()%></td>
                             <td><%= mat.getUnidadesDisponibles()%></td>
-                            <td><%= mat.getEstado()%></td>
                             <td>
                                 <a class="btn btn-sm btn-info" href="${contextPath}/MaterialControlador?accion=editar&id=<%= mat.getId()%>">Editar</a>
-                                <a class="btn btn-sm btn-danger" href="javascript:eliminar(<%= mat.getId()%>)">Eliminar</a>
+                                <a class="btn btn-sm btn-danger" href="${contextPath}/MaterialControlador?accion=eliminar&id=<%= mat.getId()%>">Eliminar</a>
                             </td>
+                            <td><%= mat.getEstado()%></td>
                         </tr>
                     <%}%>
                 </tbody>
@@ -97,6 +97,9 @@ $(document).ready(function() {
     <c:if test="${not empty error}">
     alertify.error('${error}');
     <c:set var="error" value="" scope="session" />
+</c:if>
+<c:if test="${materiales.getEstado > 0}">
+
 </c:if>
     
 function eliminar(id){
