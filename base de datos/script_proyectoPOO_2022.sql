@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `biblioteca`;
-USE `biblioteca`;
+CREATE DATABASE  IF NOT EXISTS `biblioteca_web`;
+USE `biblioteca_web`;
 /*HAY QUE REVISAR CAMPOS Y TIPOS DE DATOS, ADEMAS HAY QUE METERLE INFORMACION A LAS TABLAS...*/
 CREATE TABLE `Artistas` (
   `id` int NOT NULL auto_increment,
@@ -56,6 +56,7 @@ CREATE TABLE `Materiales` (
   `ubicacion` VARCHAR(100) DEFAULT NULL,
   `nombre_autor_CV` VARCHAR(150) DEFAULT NULL,
   `unidades_disponibles` int(5) DEFAULT NULL,
+  `Estado` VARCHAR(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Tipo` (`codigo_tipo_material`),
   KEY `FK_Autor` (`codigo_autor`),

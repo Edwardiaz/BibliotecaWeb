@@ -1,4 +1,4 @@
-USE `biblioteca`;
+USE `biblioteca_web`;
 /*Registros Artistas*/
 INSERT INTO `Artistas`(nombre_artista) VALUES('Jimi Hendrix');
 INSERT INTO `Artistas`(nombre_artista) VALUES('Axl Rose');
@@ -52,23 +52,23 @@ INSERT INTO `Socios`(nombre, documento, telefono, correo_electronico, fecha_naci
 INSERT INTO `Socios`(nombre, documento, telefono, correo_electronico, fecha_nacimiento) VALUES('Erick Alas', 'ea2022', '44444', 'EA@yopmail.com', '1998/05/03');
 INSERT INTO `Socios`(nombre, documento, telefono, correo_electronico, fecha_nacimiento) VALUES('Eduardo Matias', 'em2022', '55555', 'em@yopmail.com', '1994/09/18');
 */
-/Registros materiales/
+/*Registros materiales*/
 INSERT INTO `materiales`
-(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles)
+(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles, Estado)
 VALUES
-('DVD00001', '2001: A Space Odyssey', 2, null, null, null, null, null, '1968/04/06', 6, 1, 142, null, 6, 'Seccion A, sucursal Escalon','Nombre Autor', 20);
+('DVD00001', '2001: A Space Odyssey', 2, null, null, null, null, null, '1968/04/06', 6, 1, 142, null, 6, 'Seccion A, sucursal Escalon','Nombre Autor', 20, 1);
 INSERT INTO `materiales`
-(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles)
+(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles, Estado)
 VALUES
-('CDA00001', 'Axis: Bold as Love', 1, null, null, null, null, null, '1967/12/01', 1, 6, 39, 13, null, 'Seccion B, sucursal Escalon','Nombre Autor', 15);
+('CDA00001', 'Axis: Bold as Love', 1, null, null, null, null, null, '1967/12/01', 1, 6, 39, 13, null, 'Seccion B, sucursal Escalon','Nombre Autor', 15, 1);
 INSERT INTO `materiales`
-(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles)
+(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles, Estado)
 VALUES
-('REV00001', 'Vanidades', 3, null, null, 2, null, null, '1995/05/02', null, null, null, 30, null, 'Seccion C, sucursal Escalon','Nombre Autor', 20);
+('REV00001', 'Vanidades', 3, null, null, 2, null, null, '1995/05/02', null, null, null, 30, null, 'Seccion C, sucursal Escalon','Nombre Autor', 20, 1);
 INSERT INTO `materiales`
-(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles)
+(id, titulo, codigo_tipo_material, codigo_autor, numero_de_paginas, codigo_editorial, isbn, periodicidad, fecha_publicacion, codigo_artista, codigo_genero, duracion, numero_de_canciones, codigo_director, ubicacion, nombre_autor_CV, unidades_disponibles, Estado)
 VALUES
-('LIB00001', 'Harry Potter: La Piedra Filosofal', 4, 5, 254, 1, '8478884459', null, '1999/01/01', null, 4, null, null, null, 'Seccion D, sucursal Escalon','Nombre Autor',7);
+('LIB00001', 'Harry Potter: La Piedra Filosofal', 4, 5, 254, 1, '8478884459', null, '1999/01/01', null, 4, null, null, null, 'Seccion D, sucursal Escalon','Nombre Autor',7, 1);
 /*Insert para tipo usuario o rol*/
 INSERT INTO `rol`(rol, numero_prestamos, dias_prestamo) VALUES('Administrador',99,99);
 INSERT INTO `rol`(rol, numero_prestamos, dias_prestamo) VALUES('Profesor',7,7);
@@ -78,6 +78,7 @@ INSERT INTO `rol`(rol, numero_prestamos, dias_prestamo) VALUES('Alumno',3,5);
 INSERT INTO `Usuarios`(nombre, apellido, nickname, email, pass, mora, fecha_nacimiento, codigo_rol) VALUES('Jorge Eduardo', 'Díaz Córdova', 'StarDestroyer', 'jorge@gmail.com', '123456', 0.00, '1995/09/04', 1);
 INSERT INTO `Usuarios`(nombre, apellido, nickname, email, pass, mora, fecha_nacimiento, codigo_rol) VALUES('Eduardo', 'Trujillo', 'Trujillo', 'Trujillo@gmail.com', '123456', 0.00, '1990/10/10', 1);
 INSERT INTO `Usuarios`(nombre, apellido, nickname, email, pass, mora, fecha_nacimiento, codigo_rol) VALUES('Erick', 'Alas', 'Erick', 'erick@gmail.com', '123456', 0.00, '1995/01/01', 1);
+INSERT INTO `Usuarios`(nombre, apellido, nickname, email, pass, mora, fecha_nacimiento, codigo_rol) VALUES('Eduardo', 'Matias', 'Matias', 'matias@gmail.com', '123456', 0.00, '1992/09/07', 1);
 
 /*Registro prestamos*/
 INSERT INTO `Prestamos`(codigo_material, codigo_usuario, fecha_prestamo, fecha_devolucion) VALUES('DVD00001', 1, '2022/09/27', '2022/10/01');
