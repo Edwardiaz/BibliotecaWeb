@@ -71,7 +71,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Rol?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Rol?", function(e){
      if(e){
          location.href="RolControlador?accion=eliminar&id="+ id;
      } 

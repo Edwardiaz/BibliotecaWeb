@@ -67,7 +67,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Artista?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Artista?", function(e){
      if(e){
          location.href="ArtistaControlador?accion=eliminar&id="+ id;
      } 

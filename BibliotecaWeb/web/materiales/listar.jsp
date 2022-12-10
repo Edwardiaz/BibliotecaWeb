@@ -98,7 +98,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este material?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este material?", function(e){
      if(e){
          location.href="MaterialControlador?accion=eliminar&id="+ id;
      } 

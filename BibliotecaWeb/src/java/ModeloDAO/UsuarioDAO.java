@@ -263,5 +263,52 @@ public class UsuarioDAO{
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
-    }     
+    }
+    
+    public int pagarMora(String id) {
+        try {
+            int rows = 0;
+            //Codigo SQL para insertar registro a tabla
+            String sql = "UPDATE usuarios SET mora = 0 WHERE usuarios.id ='"+ id +"'";
+
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
+            ps = con.prepareStatement(sql);
+
+            rows = ps.executeUpdate();        
+            return rows;
+            
+        } catch (SQLException ex){
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int cambiarPass(Usuario usr) throws SQLException{
+        try {
+            rows = 0;
+                //Codigo SQL para insertar registro a tabla
+            String sql = "UPDATE usuarios SET pass = ? WHERE nickname = ? AND email = ? AND fecha_nacimiento = ?";
+        
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setString(1, usr.getPass());
+            ps.setString(2, usr.getNickname());
+            ps.setString(3, usr.getEmail()); 
+            ps.setString(4, usr.getFecha_nacimiento());
+            
+            rows = ps.executeUpdate();        
+            return rows;
+            
+        } catch (SQLException ex){
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }    
 }

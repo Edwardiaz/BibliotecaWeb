@@ -67,7 +67,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Editorial?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Editorial?", function(e){
      if(e){
          location.href="EditorialControlador?accion=eliminar&id="+ id;
      } 

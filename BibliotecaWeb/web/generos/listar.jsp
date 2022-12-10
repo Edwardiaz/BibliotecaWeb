@@ -67,7 +67,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Genero?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Genero?", function(e){
      if(e){
          location.href="GeneroControlador?accion=eliminar&id="+ id;
      } 
