@@ -299,7 +299,7 @@ public class MaterialControlador extends HttpServlet{
             } catch (SQLException ex) {
                Logger.getLogger(MaterialControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if(action.equals("AgregarCV")){
+        }else if(action.equals("AgregarTesis")){
             try {
                 listaErrores.clear();
                 
