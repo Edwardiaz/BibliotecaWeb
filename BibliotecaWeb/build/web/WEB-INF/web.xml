@@ -40,6 +40,10 @@
         <servlet-name>LoginControlador</servlet-name>
         <servlet-class>Controlador.LoginControlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PrestamoControlador</servlet-name>
+        <servlet-class>Controlador.PrestamoControlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Usuario</servlet-name>
         <url-pattern>/Usuario</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>LoginControlador</servlet-name>
         <url-pattern>/LoginControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrestamoControlador</servlet-name>
+        <url-pattern>/PrestamoControlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

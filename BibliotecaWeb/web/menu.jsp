@@ -41,7 +41,7 @@
             Prestamos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="${contextPath}/Prestamo?accion=listar">Listar</a>
+            <a class="dropdown-item" href="${contextPath}/PrestamoControlador?accion=listar">Listar</a>
           </div>
         </li>
       </c:if>

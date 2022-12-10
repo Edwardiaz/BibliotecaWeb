@@ -15,15 +15,42 @@ import java.util.Date;
 public class Prestamos {
 
     private Integer id;
-    private Date fechaPrestamo;
-    private Date fechaDevolucion;
+    private String fechaPrestamo;
+    private String fechaDevolucion;
 /*    @JoinColumn(name = "codigo_material", referencedColumnName = "id")
     @ManyToOne(optional = false)*/
-    private Materiales codigoMaterial;
+    private String codigoMaterial;
     /*@JoinColumn(name = "codigo_usuario", referencedColumnName = "id")
     @ManyToOne(optional = false)*/
-    private Usuario codigoUsuario;
+    private int codigoUsuario;
+    private String material;
+    private String usuario;
+    private int activo;
 
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+    
     public Prestamos() {
     }
 
@@ -31,10 +58,12 @@ public class Prestamos {
         this.id = id;
     }
 
-    public Prestamos(Integer id, Date fechaPrestamo, Date fechaDevolucion) {
+    public Prestamos(Integer id, String codigoMaterial, int codigoUsuario, String fechaPrestamo, String fechaDevolucion) {
         this.id = id;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
+        this.codigoMaterial = codigoMaterial;
+        this.codigoUsuario = codigoUsuario;
     }
 
     public Integer getId() {
@@ -45,35 +74,35 @@ public class Prestamos {
         this.id = id;
     }
 
-    public Date getFechaPrestamo() {
+    public String getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public void setFechaPrestamo(Date fechaPrestamo) {
+    public void setFechaPrestamo(String fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public Date getFechaDevolucion() {
+    public String getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(Date fechaDevolucion) {
+    public void setFechaDevolucion(String fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public Materiales getCodigoMaterial() {
+    public String getCodigoMaterial() {
         return codigoMaterial;
     }
 
-    public void setCodigoMaterial(Materiales codigoMaterial) {
+    public void setCodigoMaterial(String codigoMaterial) {
         this.codigoMaterial = codigoMaterial;
     }
 
-    public Usuario getCodigoUsuario() {
+    public int getCodigoUsuario() {
         return codigoUsuario;
     }
 
-    public void setCodigoUsuario(Usuario codigoUsuario) {
+    public void setCodigoUsuario(int codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
     }
 

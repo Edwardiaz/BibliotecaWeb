@@ -29,7 +29,10 @@ public class TipoMaterialDAO {
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT id, tipo_material FROM tipo_material";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -44,9 +47,6 @@ public class TipoMaterialDAO {
         } catch (SQLException ex){
             Logger.getLogger(TipoMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         } 
     }
 
@@ -56,7 +56,10 @@ public class TipoMaterialDAO {
                 //Codigo SQL para insertar registro a tabla
             String sql = "INSERT INTO tipo_material (tipo_material) VALUES(?)";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             ps.setString(1, tipoMaterial.getTipoMaterial());
@@ -67,10 +70,7 @@ public class TipoMaterialDAO {
         } catch (SQLException ex){
             Logger.getLogger(TipoMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
-        } 
+        }
     }    
     
     public boolean TipoMaterialExiste(String nombre) throws SQLException{
@@ -79,7 +79,10 @@ public class TipoMaterialDAO {
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT * FROM tipo_material WHERE tipo_material ='"+ nombre +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -89,9 +92,6 @@ public class TipoMaterialDAO {
             
         } catch (SQLException ex){
             Logger.getLogger(TipoMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         }
         
         return false;
@@ -102,7 +102,10 @@ public class TipoMaterialDAO {
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT id, tipo_material FROM tipo_material WHERE id ='"+ id +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             rs = ps.executeQuery();
@@ -119,9 +122,6 @@ public class TipoMaterialDAO {
         } catch (SQLException ex){
             Logger.getLogger(EditorialDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         }
     }
 
@@ -131,7 +131,10 @@ public class TipoMaterialDAO {
                 //Codigo SQL para insertar registro a tabla
             String sql = "UPDATE tipo_material SET tipo_material = ? WHERE id ='" + tipo.getId() + "'";
         
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
             
             ps.setString(1, tipo.getTipoMaterial());
@@ -142,9 +145,6 @@ public class TipoMaterialDAO {
         } catch (SQLException ex){
             Logger.getLogger(TipoMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         } 
     }
     
@@ -154,7 +154,10 @@ public class TipoMaterialDAO {
             //Codigo SQL para insertar borrar registro
             String sql = "DELETE FROM tipo_material WHERE id ='"+ id +"'";
 
-            con = Conexion.getConnection();
+            if(con == null || con.isClosed()){
+                con = Conexion.getConnection();
+            }
+            
             ps = con.prepareStatement(sql);
 
             rows = ps.executeUpdate();        
@@ -163,9 +166,6 @@ public class TipoMaterialDAO {
         } catch (SQLException ex){
             Logger.getLogger(TipoMaterialDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(con);
         } 
     }  
 }
