@@ -46,7 +46,11 @@ public class MaterialesDAO {
                 +"artistas ON artistas.id = materiales.codigo_artista LEFT JOIN "
                 +"editoriales ON editoriales.id = materiales.codigo_editorial ";
                 //+ "WHERE materiales.titulo like '"+titulo+"%'";
-            conn = Conexion.getConnection();
+                
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -79,9 +83,6 @@ public class MaterialesDAO {
         } catch (SQLException ex){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         } 
     }
 
@@ -97,7 +98,10 @@ public class MaterialesDAO {
                     + "ubicacion, nombre_autor_CV, unidades_disponibles) " 
                     + "VALUES(?,?,4,?,?,?,?,?,?,?)";
         
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             
             /*ps.setString(1, rol.getRol());
@@ -110,9 +114,6 @@ public class MaterialesDAO {
         } catch (SQLException ex){
             Logger.getLogger(RolDAO.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         } 
     }
     
@@ -124,6 +125,11 @@ public class MaterialesDAO {
                 + "codigo_autor,numero_de_paginas,codigo_editorial,isbn,"
                 + "fecha_publicacion,unidades_disponibles, ubicacion) VALUES (?,?,4,?,?,?,?,?,?,?)";
         //PreparedStatement stmt = null;
+        
+        if(conn == null || conn.isClosed()){
+            conn = Conexion.getConnection();
+        }        
+        
         ps = conn.prepareStatement(sql);
         Connection conn = null;
         int rows = 0;
@@ -153,19 +159,20 @@ public class MaterialesDAO {
             rows = ps.executeUpdate();
         }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return rows;
     }
     
-    public int insertarCV(Materiales materiales){ 
+    public int insertarCV(Materiales materiales) throws SQLException{ 
         
         String sql = "INSERT INTO materiales (id,titulo,codigo_tipo_material,"
                 + "numero_de_paginas, ubicacion, nombre_autor_CV,"
                 + "fecha_publicacion,unidades_disponibles) VALUES (?,?,6,?,?,?,?,?)";
-        Connection conn = null;
+
+        if(conn == null || conn.isClosed()){
+            conn = Conexion.getConnection();
+        }        
+        
         int rows = 0;
 
         try{
@@ -182,9 +189,6 @@ public class MaterialesDAO {
             rows = ps.executeUpdate();
         }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return rows;
     }
@@ -198,7 +202,10 @@ public class MaterialesDAO {
         int idGenero = consultarGeneroPorNombre(materiales.getGenero());
 
         try{
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             int index = 1;
             ps.setString(index++, crearID("CDA"));
@@ -214,9 +221,6 @@ public class MaterialesDAO {
             rows = ps.executeUpdate();
         }catch(Exception e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return rows;
     }
@@ -231,7 +235,10 @@ public class MaterialesDAO {
         int rows = 0;
 
         try{
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             int index = 1;
             ps.setString(index++, crearID("DVD"));
@@ -245,9 +252,6 @@ public class MaterialesDAO {
             rows = ps.executeUpdate();
         }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return rows;
     }
@@ -259,7 +263,10 @@ public class MaterialesDAO {
          int rows = 0;
 
          try{
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+             
             ps = conn.prepareStatement(sql);
             int index = 1;
             ps.setString(index++, crearID("REV"));
@@ -272,9 +279,6 @@ public class MaterialesDAO {
             rows = ps.executeUpdate();
          }catch(SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-         } finally{
-             Conexion.close(ps);
-             Conexion.close(conn);
          } 
         return rows;
     }
@@ -288,7 +292,10 @@ public class MaterialesDAO {
         String id = "";
         ResultSet rs = null;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             //vamos convirtiendo cada ID en int quitando las tres primera letras
@@ -332,9 +339,6 @@ public class MaterialesDAO {
             }
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -345,7 +349,10 @@ public class MaterialesDAO {
         ResultSet rs = null;
         int id = 0;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -355,9 +362,6 @@ public class MaterialesDAO {
             
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -368,7 +372,10 @@ public class MaterialesDAO {
         ResultSet rs = null;
         int id = 0;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -378,9 +385,6 @@ public class MaterialesDAO {
             
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -391,7 +395,10 @@ public class MaterialesDAO {
         ResultSet rs = null;
         int id = 0;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -401,9 +408,6 @@ public class MaterialesDAO {
             
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -414,7 +418,10 @@ public class MaterialesDAO {
         ResultSet rs = null;
         int id = 0;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -424,9 +431,6 @@ public class MaterialesDAO {
             
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -437,7 +441,10 @@ public class MaterialesDAO {
         ResultSet rs = null;
         int id = 0;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -447,9 +454,6 @@ public class MaterialesDAO {
             
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -460,7 +464,10 @@ public class MaterialesDAO {
         ResultSet rs = null;
         int id = 0;
         try {
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {                
@@ -470,9 +477,6 @@ public class MaterialesDAO {
             
         } catch (Exception e) {
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally{
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         return id;
     }
@@ -484,7 +488,10 @@ public class MaterialesDAO {
             //Codigo SQL para insertar registro a tabla
             String sql = "SELECT * FROM materiales WHERE titulo = '"+ tituloMaterial +"'";
 
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             
@@ -494,9 +501,6 @@ public class MaterialesDAO {
             
         } catch (SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
         
         return false;
@@ -524,7 +528,10 @@ public class MaterialesDAO {
                 +"editoriales ON editoriales.id = materiales.codigo_editorial  "
                 + "WHERE materiales.id ='"+ id +"'";
 
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             
             rs = ps.executeQuery();
@@ -561,9 +568,6 @@ public class MaterialesDAO {
         } catch (SQLException ex){
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
     }
     
@@ -596,7 +600,10 @@ public class MaterialesDAO {
                 +"editoriales ON editoriales.id = materiales.codigo_editorial  "
                 + "WHERE materiales.titulo like '%"+ titulo +"%'";
 
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             
             rs = ps.executeQuery();
@@ -633,9 +640,6 @@ public class MaterialesDAO {
         } catch (SQLException ex){
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         }
     }
     
@@ -660,7 +664,10 @@ public class MaterialesDAO {
             int autorID = consultarAutorPorNombre(material.getAutor());
             int idArtista = consultarArtistaPorNombre(material.getArtista());
             
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
             
             /*ps.setString(1, material.getTitulo());
@@ -689,9 +696,6 @@ public class MaterialesDAO {
         } catch (SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         } 
     }
     
@@ -701,7 +705,10 @@ public class MaterialesDAO {
             //Codigo SQL para insertar borrar registro
             String sql = "DELETE FROM materiales WHERE id ='"+ id +"'";
 
-            conn = Conexion.getConnection();
+            if(conn == null || conn.isClosed()){
+                conn = Conexion.getConnection();
+            }
+            
             ps = conn.prepareStatement(sql);
 
             rows = ps.executeUpdate();        
@@ -710,9 +717,6 @@ public class MaterialesDAO {
         } catch (SQLException e){
             Logger.getLogger(MaterialesDAO.class.getName()).log(Level.SEVERE, null, e);
             return 0;
-        } finally {
-            Conexion.close(ps);
-            Conexion.close(conn);
         } 
     }
 }
