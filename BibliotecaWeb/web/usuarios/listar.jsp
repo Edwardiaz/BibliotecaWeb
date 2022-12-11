@@ -55,6 +55,7 @@
                             <td><%= usr.getRol()%></td>
                             <td>
                                 <a class="btn btn-sm btn-info" href="${contextPath}/UsuarioControlador?accion=editar&id=<%= usr.getId()%>">Editar</a>
+                                <a class="btn btn-sm btn-warning" href="javascript:pagarMora(<%= usr.getId()%>)">Pagar Mora</a>
                                 <a class="btn btn-sm btn-danger" href="javascript:eliminar(<%= usr.getId()%>)">Eliminar</a>
                             </tr>
                     <%}%>
@@ -79,9 +80,17 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Usuario?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Usuario?", function(e){
      if(e){
          location.href="UsuarioControlador?accion=eliminar&id="+ id;
+     } 
+  });
+}
+
+function pagarMora(id){
+  alertify.confirm("¿Realmente desea confirmar la cancelación de la mora para este usuario?", function(e){
+     if(e){
+         location.href="UsuarioControlador?accion=pagarMora&id="+ id;
      } 
   });
 }

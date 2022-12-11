@@ -104,3 +104,14 @@
     </div>
 </body>
 </html>
+
+<script>
+    <c:if test="${not empty exito}">
+    alertify.success('${exito}');
+        <c:set var="exito" value="" scope="session" />
+    </c:if>
+    <c:if test="${not empty error}">
+    alertify.error('${error}');
+        <c:set var="error" value="" scope="session" />
+    </c:if>    
+</script>

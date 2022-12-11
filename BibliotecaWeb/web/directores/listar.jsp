@@ -67,7 +67,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Director?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Director?", function(e){
      if(e){
          location.href="DirectorControlador?accion=eliminar&id="+ id;
      } 

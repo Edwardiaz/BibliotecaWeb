@@ -67,7 +67,7 @@ $(document).ready(function() {
 </c:if>
     
 function eliminar(id){
-  alertify.confirm("¿Realmente decea eliminar este Autor?", function(e){
+  alertify.confirm("¿Realmente desea eliminar este Autor?", function(e){
      if(e){
          location.href="AutorControlador?accion=eliminar&id="+ id;
      } 

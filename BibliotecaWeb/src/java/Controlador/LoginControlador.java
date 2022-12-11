@@ -126,6 +126,47 @@ public class LoginControlador extends HttpServlet {
             request.getSession().setAttribute("rolUsuario",null);
 
             response.sendRedirect(request.getContextPath() + "/index.jsp"); 
+        }else if(action.equals("Restablecer")){
+            try {
+                listaErrores.clear();
+
+                usr.setNickname(request.getParameter("txtNickname2"));
+                usr.setEmail(request.getParameter("txtEmail2"));
+                usr.setFecha_nacimiento(request.getParameter("txtFechaNacimiento2"));
+                usr.setPass(request.getParameter("txtNewPass"));
+
+                if (Validaciones.isEmpty(usr.getNickname())) {
+                    listaErrores.add("Campo Nickname es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getEmail())) {
+                    listaErrores.add("Campo Email es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getFecha_nacimiento())) {
+                    listaErrores.add("Campo Fecha de Nacimiento es obligatorio");
+                }
+                if (Validaciones.isEmpty(usr.getPass())) {
+                    listaErrores.add("Campo Contraseña es obligatorio");
+                }
+
+                if (listaErrores.size() > 0) {
+                    request.setAttribute("listaErrores", listaErrores);
+                    request.setAttribute("usuario", usr);
+                    //request.getRequestDispatcher("UsuarioControlador?accion=agregar").forward(request, response);
+                    acceso = login;
+                    RequestDispatcher vista = request.getRequestDispatcher(acceso);
+                    vista.forward(request, response);                    
+                } else {
+                    if (dao.cambiarPass(usr) > 0) {
+                        request.getSession().setAttribute("exito", "Clave de usuario restablecida exitosamente!");
+                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+                    } else {
+                        request.getSession().setAttribute("error", "La clave de usuario no ha podido ser restablecida!");
+                        response.sendRedirect(request.getContextPath() + "/index.jsp");
+                    }
+                }
+            } catch (SQLException ex) {
+               Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
     }
 

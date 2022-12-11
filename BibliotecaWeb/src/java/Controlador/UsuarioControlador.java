@@ -235,6 +235,18 @@ public class UsuarioControlador extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
                 //acceso = listar;
             }                
+        }else if(action.equals("pagarMora")){
+            String id = request.getParameter("id");
+
+            if (dao.pagarMora(id) > 0) {
+                request.getSession().setAttribute("exito", "Mora cancelada exitosamente!");
+                response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
+                //acceso = listar;
+            } else {
+                request.getSession().setAttribute("error", "La mora no pudo ser cancelada!");
+                response.sendRedirect(request.getContextPath() + "/UsuarioControlador?accion=listar");
+                //acceso = listar;
+            }                
         }else if(action.equals("perfil")){
             acceso = perfil;
             
