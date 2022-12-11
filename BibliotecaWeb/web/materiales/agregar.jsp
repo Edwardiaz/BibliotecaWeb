@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-6 form-group">
                             <label for="exampleFormControlSelect1">Seleccione tipo de material a guardar</label>
-                            <select name="tipoMaterial" onchange="changeInput(this.value);" class="form-control" id="exampleFormControlSelect1">
+                            <select name="tipoMaterial" class="form-control" id="exampleFormControlSelect1">
                                 <option value=""> -Seleccione una opción del listado- </option>
                                 <%
                                     TipoMaterialDAO tipoDao = new TipoMaterialDAO();
@@ -70,12 +70,12 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-6 form-group" id="tituloDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="tituloDiv" style="visibility: hidden; display: none;">
                             <label>Titulo</label>
                             <input type="text" name="titulo" class="form-control" value="${materiales.titulo}" placeholder="Ingrese titulo del material"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                         <!--<c :if test="$ {material.tipoMaterial != 'Libro'}">-->
-                        <div class="col-6 form-group" id="autorDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="autorDiv" style="visibility: hidden; display: none;">
                             <label for="exampleFormControlSelect2">Seleccione un Autor</label>
                             <select name="Autor" class="form-control" id="exampleFormControlSelect2" value="${materiales.autor}">
                                 <option value=""> -Seleccione una opción del listado- </option>
@@ -94,11 +94,11 @@
                         <!--< /c:if> -->
                     </div>
                     <div class="row">
-                        <div class="col-6 form-group" id="numPagDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="numPagDiv" style="visibility: hidden; display: none;">
                             <label>Número de paginas</label>
                             <input type="text" name="numero_de_paginas" class="form-control" value="${materiales.numero_de_paginas}" placeholder="Ingrese el número de páginas"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div class="col-6 form-group" id="editorialDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="editorialDiv" style="visibility: hidden; display: none;">
                             <label for="exampleFormControlSelect3">Seleccione editorial</label>
                             <select name="editoriales" class="form-control" id="exampleFormControlSelect3" value="${materiales.editorial}">
                                 <option value=""> -Seleccione una opción del listado- </option>
@@ -116,21 +116,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 form-group" id="fechaDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="fechaDiv" style="visibility: hidden; display: none;">
                             <label>Fecha de publicación</label>
                             <input type="date" name="Fecha" class="form-control" value="${materiales.fecha_publicacion}" placeholder="Ingrese fecha de publicación"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
-                        <div class="col-6 form-group" id="isbnDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="isbnDiv" style="visibility: hidden; display: none;">
                             <label>ISBN</label>
                             <input type="text" name="isbn" class="form-control" value="${materiales.isbn}" placeholder="Ingrese el ISBN"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                     </div>                     
                     <div class="row">
-                        <div class="col-6 form-group" id="periodicidadDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="periodicidadDiv" style="visibility: hidden; display: none;">
                             <label>Periodicidad</label>
                             <input type="text" name="periodicidad" class="form-control" placeholder="Ingrese periodicidad el material"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
-                        <div class="col-6 form-group" id="artistaDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="artistaDiv" style="visibility: hidden; display: none;">
                             <label for="exampleFormControlSelect4">Seleccione Artista</label>
                             <select name="artistas" class="form-control" id="exampleFormControlSelect4" value="${materiales.artista}">
                                 <option value=""> -Seleccione una opción del listado- </option>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <div class="row">                     
-                        <div class="col-6 form-group" id="generoDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="generoDiv" style="visibility: hidden; display: none;">
                             <label for="exampleFormControlSelect5">Seleccione un Género</label>
                             <select name="generos" class="form-control" id="exampleFormControlSelect5" value="${materiales.genero}">
                                 <option value=""> -Seleccione una opción del listado- </option>
@@ -164,17 +164,17 @@
                                 <%}%>
                             </select><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
-                        <div class="col-6 form-group" id="duracionDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="duracionDiv" style="visibility: hidden; display: none;">
                             <label>Duración</label>
                             <input type="text" name="duracion" class="form-control" placeholder="Ingrese la duración (en minutos)"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>   
                     </div>
                     <div class="row">
-                        <div class="col-6 form-group" id="numCancionesDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="numCancionesDiv" style="visibility: hidden; display: none;">
                             <label>Número de canciones</label>
                             <input type="text" name="numero_de_canciones" class="form-control" placeholder="Ingrese número de canciones"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
-                        <div class="col-6 form-group" id="directorDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="directorDiv" style="visibility: hidden; display: none;">
                             <label for="exampleFormControlSelect6">Seleccione Director</label>
                             <select name="directores" class="form-control" id="exampleFormControlSelect6" value="${materiales.director}">
                                 <option value=""> -Seleccione una opción del listado- </option>
@@ -192,17 +192,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 form-group" id="ubicacionDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="ubicacionDiv" style="visibility: hidden; display: none;">
                             <label>Ubicación</label>
                             <input type="text" name="ubicacion" class="form-control" value="${materiales.ubicacion}" placeholder="Ingrese la ubicación"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
-                        <div class="col-6 form-group" id="tesisDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="tesisDiv" style="visibility: hidden; display: none;">
                             <label>Autor de Tesis</label>
                             <input type="text" name="nombre_autor_cv" class="form-control" value="${materiales.nombre_autor_cv}" placeholder="Ingrese el autor de la tesis"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 form-group" id="unidadDiv" style="visibility: hidden;">
+                        <div class="col-6 form-group" id="unidadDiv" style="visibility: hidden; display: none;">
                             <label>Unidades disponibles</label>
                             <input type="text" name="unidades_disponibles" class="form-control" value="${materiales.unidades_disponibles}" placeholder="Ingrese las unidades disponibles"><span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>                        
@@ -212,7 +212,7 @@
                             <a class="btn btn-info w-50" href="${contextPath}/MaterialControlador?accion=listar">Regresar a Lista</a>
                         </div>
                         <div class="col-6  form-group text-right pr-0 mr-0">
-                            <input id="boton" type="submit" class="btn btn-success w-50" name="accion" value="--">
+                            <input id="boton" type="submit" class="btn btn-success w-50" disabled name="accion" value="--">
                         </div>                                
                     </div>                              
                 </form>           
@@ -224,90 +224,158 @@
             
             let hiddenElement0 = document.getElementById('tituloDiv')
             if(e.target.value !== ''){
-                hiddenElement0.style.visibility = 'visible'
+                hiddenElement0.style.visibility = 'visible';
+                hiddenElement0.style.display = 'inline-block';
             } else {
                 hiddenElement0.style.visibility = 'hidden'
+                hiddenElement0.style.display = 'none';
             }
             
             let hiddenElement1 = document.getElementById('autorDiv')
             if(e.target.value === '4' || e.target.value === '5'){
                 hiddenElement1.style.visibility = 'visible'
+                hiddenElement1.style.display = 'inline-block';
             } else {
                 hiddenElement1.style.visibility = 'hidden'
+                hiddenElement1.style.display = 'none';
             }
             
             let hiddenElement2 = document.getElementById('periodicidadDiv')
             if(e.target.value === '3'){
                 hiddenElement2.style.visibility = 'visible'
+                hiddenElement2.style.display = 'inline-block';
             } else {
                 hiddenElement2.style.visibility = 'hidden'
+                hiddenElement2.style.display = 'none';
             }
             
-            let hiddenElement3 = document.getElementById('periodicidadDiv')
-            if(e.target.value === '3'){
+            let hiddenElement3 = document.getElementById('directorDiv')
+            if(e.target.value === '2'){
                 hiddenElement3.style.visibility = 'visible'
+                hiddenElement3.style.display = 'inline-block';
             } else {
                 hiddenElement3.style.visibility = 'hidden'
+                hiddenElement3.style.display = 'none';
             }
             
             let hiddenElement4 = document.getElementById('numPagDiv')
-            if(e.target.value === '4' || e.target.value === '5'){
+            if(e.target.value === '4' || e.target.value === '5' || e.target.value === '6'){
                 hiddenElement4.style.visibility = 'visible'
+                hiddenElement4.style.display = 'inline-block';
             } else {
                 hiddenElement4.style.visibility = 'hidden'
+                hiddenElement4.style.display = 'none';
             }
             
             let hiddenElement5 = document.getElementById('editorialDiv')
-            if(e.target.value === '4' || e.target.value === '5'){
+            if(e.target.value === '3' || e.target.value === '4' || e.target.value === '5'){
                 hiddenElement5.style.visibility = 'visible'
+                hiddenElement5.style.display = 'inline-block';
             } else {
                 hiddenElement5.style.visibility = 'hidden'
+                hiddenElement5.style.display = 'none';
             }
             
             let hiddenElement6 = document.getElementById('fechaDiv')
-            if(e.target.value === '4' || e.target.value === '5'){
+            if(e.target.value !== ''){
                 hiddenElement6.style.visibility = 'visible'
+                hiddenElement6.style.display = 'inline-block';
             } else {
                 hiddenElement6.style.visibility = 'hidden'
+                hiddenElement6.style.display = 'none';
             }
             
             let hiddenElement7 = document.getElementById('isbnDiv')
             if(e.target.value === '4' || e.target.value === '5'){
                 hiddenElement7.style.visibility = 'visible'
+                hiddenElement7.style.display = 'inline-block';
             } else {
                 hiddenElement7.style.visibility = 'hidden'
+                hiddenElement7.style.display = 'none';
             }
             
             let hiddenElement8 = document.getElementById('ubicacionDiv')
             if(e.target.value !== ''){
                 hiddenElement8.style.visibility = 'visible'
+                hiddenElement8.style.display = 'inline-block';
             } else {
                 hiddenElement8.style.visibility = 'hidden'
+                hiddenElement8.style.display = 'none';
             }
             
             let hiddenElement9 = document.getElementById('unidadDiv')
             if(e.target.value !== ''){
                 hiddenElement9.style.visibility = 'visible'
+                hiddenElement9.style.display = 'inline-block';
             } else {
                 hiddenElement9.style.visibility = 'hidden'
+                hiddenElement9.style.display = 'none';
+            }
+            
+            let hiddenElement10 = document.getElementById('tesisDiv')
+            if(e.target.value === '6'){
+                hiddenElement10.style.visibility = 'visible'
+                hiddenElement10.style.display = 'inline-block';
+            } else {
+                hiddenElement10.style.visibility = 'hidden'
+                hiddenElement10.style.display = 'none';
+            }
+            let hiddenElement11 = document.getElementById('artistaDiv')
+            if(e.target.value === '1'){
+                hiddenElement11.style.visibility = 'visible'
+                hiddenElement11.style.display = 'inline-block';
+            } else {
+                hiddenElement11.style.visibility = 'hidden'
+                hiddenElement11.style.display = 'none';
+            }
+            let hiddenElement12 = document.getElementById('generoDiv')
+            if(e.target.value === '1' || e.target.value === '2'){
+                hiddenElement12.style.visibility = 'visible'
+                hiddenElement12.style.display = 'inline-block';
+            } else {
+                hiddenElement12.style.visibility = 'hidden'
+                hiddenElement12.style.display = 'none';
+            }
+            let hiddenElement13 = document.getElementById('duracionDiv')
+            if(e.target.value === '1' || e.target.value === '2'){
+                hiddenElement13.style.visibility = 'visible'
+                hiddenElement13.style.display = 'inline-block';
+            } else {
+                hiddenElement13.style.visibility = 'hidden'
+                hiddenElement13.style.display = 'none';
+            }
+            let hiddenElement14 = document.getElementById('numCancionesDiv')
+            if(e.target.value === '1'){
+                hiddenElement14.style.visibility = 'visible'
+                hiddenElement14.style.display = 'inline-block';
+            } else {
+                hiddenElement14.style.visibility = 'hidden'
+                hiddenElement14.style.display = 'none';
+            }
+            
+            var input = document.getElementById("boton");
+            if(e.target.value === "1"){
+                input.value = "AgregarCD";
+                document.getElementById("boton").disabled = false;
+            } else if(e.target.value==="2"){
+                input.value = "AgregarDVD";
+                document.getElementById("boton").disabled = false;
+            } else if(e.target.value === "3"){
+                input.value = "AgregarRevista";
+                document.getElementById("boton").disabled = false;
+            } else if(e.target.value==="4"){
+                input.value = "AgregarLibro";
+                document.getElementById("boton").disabled = false;
+            } else if(e.target.value==="5"){
+                input.value = "AgregarLibro";
+                document.getElementById("boton").disabled = false;
+            } else if(e.target.value==="6"){
+                input.value = "AgregarTesis";
+                document.getElementById("boton").disabled = false;
+            } else {
+                input.value = "--";
+                document.getElementById("boton").disabled = true;
             }
         }
-        
-        function changeInput(val) {
-            var input = document.getElementById("boton");
-            if(val.localeCompare('1')){
-                input.value = "AgregarCD";
-            } else if(val.localeCompare('2')){
-                input.value = "AgregarDVD";
-            } else if(val.localeCompare('3')){
-                input.value = "AgregarRevista";
-            } else if(val.localeCompare('4')){
-                input.value = "AgregarLibro";
-            } else if(val.localeCompare('5')){
-                input.value = "AgregarLibro";
-            } else if(val.localeCompare('6')){
-                input.value = "AgregarTesis";
-            }
-        }  
     </script>
 </html>

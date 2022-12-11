@@ -194,30 +194,19 @@ public class MaterialControlador extends HttpServlet{
             try {
                 listaErrores.clear();
                 
-                //material.setId(request.getParameter("id"));
                 material.setTitulo(request.getParameter("titulo"));
-                material.setTipoMaterial(request.getParameter("tipo_material"));
+                material.setTipoMaterial(request.getParameter("tipoMaterial"));
                 material.setAutor(request.getParameter("Autor"));
                 material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
                 material.setEditorial(request.getParameter("editoriales"));
                 material.setIsbn(request.getParameter("isbn"));
-                //material.setPeriodicidad(request.getParameter("periodicidad"));
-                material.setFechaPublicacion(request.getParameter("fecha"));
-                //material.setArtista(request.getParameter("artistas"));
-                //material.setGenero(request.getParameter("generos"));
-                //material.setDuracion(request.getParameter("duracion"));
-                //material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
-                //material.setDirector(request.getParameter("directores"));
+                material.setFechaPublicacion(request.getParameter("Fecha"));
                 material.setUbicacion(request.getParameter("ubicacion"));
-                //material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
                 material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
 
                 if (Validaciones.isEmpty(material.getTitulo())) {
                     listaErrores.add("Campo Titulo obligatorio");
                 }            
-//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
-//                    listaErrores.add("Campo Tipo Material es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getAutor())) {
                     listaErrores.add("Campo Autor es obligatorio");
                 }
@@ -230,37 +219,12 @@ public class MaterialControlador extends HttpServlet{
                 if (Validaciones.isEmpty(material.getIsbn())) {
                     listaErrores.add("Campo ISBN es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
-//                    listaErrores.add("Campo Periodicidad es obligatorio");
-//                }
-                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
-                    listaErrores.add("Campo Fecha Publicación es obligatorio");
-                }
-//                if (Validaciones.isEmpty(material.getArtista())) {
-//                    listaErrores.add("Campo Artista es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getGenero())) {
-//                    listaErrores.add("Campo Genero es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getDuracion())) {
-//                    listaErrores.add("Campo Duración es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
-//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getDirector())) {
-//                    listaErrores.add("Campo Director es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getUbicacion())) {
                     listaErrores.add("Campo Ubicación es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
-//                    listaErrores.add("Campo Autor de CV es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
                     listaErrores.add("Campo Unidades Disponibles es obligatorio");
                 }
-                
                 if (listaErrores.size() > 0) {
                     request.setAttribute("listaErrores", listaErrores);
                     request.setAttribute("Material", material);
@@ -274,7 +238,7 @@ public class MaterialControlador extends HttpServlet{
                     RequestDispatcher vista = request.getRequestDispatcher(acceso);
                     vista.forward(request, response);                    
                 } else {
-                    if(material.getTipoMaterial().equalsIgnoreCase("Libro")){
+                    if(material.getTipoMaterial().equalsIgnoreCase("4")){
                         if (materialDao.insertarLibros(material, 1) > 0) {
                             request.getSession().setAttribute("exito", "Material agregado exitosamente!");
                             response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
@@ -303,20 +267,9 @@ public class MaterialControlador extends HttpServlet{
             try {
                 listaErrores.clear();
                 
-                //material.setId(request.getParameter("id"));
                 material.setTitulo(request.getParameter("titulo"));
-                //material.setTipoMaterial(request.getParameter("tipo_material"));
-                //material.setAutor(request.getParameter("Autor"));
                 material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
-                //material.setEditorial(request.getParameter("editoriales"));
-                //material.setIsbn(request.getParameter("isbn"));
-                //material.setPeriodicidad(request.getParameter("periodicidad"));
                 material.setFechaPublicacion(request.getParameter("fecha"));
-                //material.setArtista(request.getParameter("artistas"));
-                //material.setGenero(request.getParameter("generos"));
-                //material.setDuracion(request.getParameter("duracion"));
-                //material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
-                //material.setDirector(request.getParameter("directores"));
                 material.setUbicacion(request.getParameter("ubicacion"));
                 material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
                 material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
@@ -324,41 +277,11 @@ public class MaterialControlador extends HttpServlet{
                 if (Validaciones.isEmpty(material.getTitulo())) {
                     listaErrores.add("Campo Titulo obligatorio");
                 }            
-//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
-//                    listaErrores.add("Campo Tipo Material es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getAutor())) {
-//                    listaErrores.add("Campo Autor es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
                     listaErrores.add("Campo numero de páginas es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getEditorial())) {
-//                    listaErrores.add("Campo Editorial es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getIsbn())) {
-//                    listaErrores.add("Campo ISBN es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
-//                    listaErrores.add("Campo Periodicidad es obligatorio");
-//                }
-                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
-                    listaErrores.add("Campo Fecha Publicación es obligatorio");
-                }
-//                if (Validaciones.isEmpty(material.getArtista())) {
-//                    listaErrores.add("Campo Artista es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getGenero())) {
-//                    listaErrores.add("Campo Genero es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getDuracion())) {
-//                    listaErrores.add("Campo Duración es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
-//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getDirector())) {
-//                    listaErrores.add("Campo Director es obligatorio");
+//                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+//                    listaErrores.add("Campo Fecha Publicación es obligatorio");
 //                }
                 if (Validaciones.isEmpty(material.getUbicacion())) {
                     listaErrores.add("Campo Ubicación es obligatorio");
@@ -399,15 +322,7 @@ public class MaterialControlador extends HttpServlet{
         }else if(action.equals("AgregarCD")){
             try {
                 listaErrores.clear();
-                
-                //material.setId(request.getParameter("id"));
                 material.setTitulo(request.getParameter("titulo"));
-                //material.setTipoMaterial(request.getParameter("tipo_material"));
-//                material.setAutor(request.getParameter("Autor"));
-//                material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
-//                material.setEditorial(request.getParameter("editoriales"));
-//                material.setIsbn(request.getParameter("isbn"));
-//                material.setPeriodicidad(request.getParameter("periodicidad"));
                 material.setFechaPublicacion(request.getParameter("fecha"));
                 material.setArtista(request.getParameter("artistas"));
                 material.setGenero(request.getParameter("generos"));
@@ -421,27 +336,9 @@ public class MaterialControlador extends HttpServlet{
                 if (Validaciones.isEmpty(material.getTitulo())) {
                     listaErrores.add("Campo Titulo obligatorio");
                 }            
-//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
-//                    listaErrores.add("Campo Tipo Material es obligatorio");
+//                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+//                    listaErrores.add("Campo Fecha Publicación es obligatorio");
 //                }
-//                if (Validaciones.isEmpty(material.getAutor())) {
-//                    listaErrores.add("Campo Autor es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
-//                    listaErrores.add("Campo numero de páginas es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getEditorial())) {
-//                    listaErrores.add("Campo Editorial es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getIsbn())) {
-//                    listaErrores.add("Campo ISBN es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
-//                    listaErrores.add("Campo Periodicidad es obligatorio");
-//                }
-                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
-                    listaErrores.add("Campo Fecha Publicación es obligatorio");
-                }
                 if (Validaciones.isEmpty(material.getArtista())) {
                     listaErrores.add("Campo Artista es obligatorio");
                 }
@@ -454,15 +351,9 @@ public class MaterialControlador extends HttpServlet{
                 if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
                     listaErrores.add("Campo Numero de Canciones es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getDirector())) {
-//                    listaErrores.add("Campo Director es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getUbicacion())) {
                     listaErrores.add("Campo Ubicación es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
-//                    listaErrores.add("Campo Autor de CV es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
                     listaErrores.add("Campo Unidades Disponibles es obligatorio");
                 }
@@ -480,7 +371,7 @@ public class MaterialControlador extends HttpServlet{
                     RequestDispatcher vista = request.getRequestDispatcher(acceso);
                     vista.forward(request, response);                    
                 } else {
-                    if (materialDao.agregar(material) > 0) {
+                    if (materialDao.insertarCD(material) > 0) {
                         request.getSession().setAttribute("exito", "Material agregado exitosamente!");
                         response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
                         //acceso = listar;
@@ -497,50 +388,20 @@ public class MaterialControlador extends HttpServlet{
             try {
                 listaErrores.clear();
                 
-                //material.setId(request.getParameter("id"));
                 material.setTitulo(request.getParameter("titulo"));
-                //material.setTipoMaterial(request.getParameter("tipo_material"));
-                //material.setAutor(request.getParameter("Autor"));
-                //material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
-//                material.setEditorial(request.getParameter("editoriales"));
-//                material.setIsbn(request.getParameter("isbn"));
-//                material.setPeriodicidad(request.getParameter("periodicidad"));
                 material.setFechaPublicacion(request.getParameter("fecha"));
-                //material.setArtista(request.getParameter("artistas"));
                 material.setGenero(request.getParameter("generos"));
                 material.setDuracion(request.getParameter("duracion"));
-                //material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
                 material.setDirector(request.getParameter("directores"));
                 material.setUbicacion(request.getParameter("ubicacion"));
-                //material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
                 material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
 
                 if (Validaciones.isEmpty(material.getTitulo())) {
                     listaErrores.add("Campo Titulo obligatorio");
-                }            
-//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
-//                    listaErrores.add("Campo Tipo Material es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getAutor())) {
-//                    listaErrores.add("Campo Autor es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
-//                    listaErrores.add("Campo numero de páginas es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getEditorial())) {
-//                    listaErrores.add("Campo Editorial es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getIsbn())) {
-//                    listaErrores.add("Campo ISBN es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getPeriodicidad())) {
-//                    listaErrores.add("Campo Periodicidad es obligatorio");
-//                }
-                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
-                    listaErrores.add("Campo Fecha Publicación es obligatorio");
-                }
-//                if (Validaciones.isEmpty(material.getArtista())) {
-//                    listaErrores.add("Campo Artista es obligatorio");
+                }  
+                
+//                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+//                    listaErrores.add("Campo Fecha Publicación es obligatorio");
 //                }
                 if (Validaciones.isEmpty(material.getGenero())) {
                     listaErrores.add("Campo Genero es obligatorio");
@@ -548,18 +409,12 @@ public class MaterialControlador extends HttpServlet{
                 if (Validaciones.isEmpty(material.getDuracion())) {
                     listaErrores.add("Campo Duración es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
-//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getDirector())) {
                     listaErrores.add("Campo Director es obligatorio");
                 }
                 if (Validaciones.isEmpty(material.getUbicacion())) {
                     listaErrores.add("Campo Ubicación es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
-//                    listaErrores.add("Campo Autor de CV es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
                     listaErrores.add("Campo Unidades Disponibles es obligatorio");
                 }
@@ -577,7 +432,7 @@ public class MaterialControlador extends HttpServlet{
                     RequestDispatcher vista = request.getRequestDispatcher(acceso);
                     vista.forward(request, response);                    
                 } else {
-                    if (materialDao.agregar(material) > 0) {
+                    if (materialDao.insertarDVD(material) > 0) {
                         request.getSession().setAttribute("exito", "Material agregado exitosamente!");
                         response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
                         //acceso = listar;
@@ -594,69 +449,28 @@ public class MaterialControlador extends HttpServlet{
             try {
                 listaErrores.clear();
                 
-                //material.setId(request.getParameter("id"));
                 material.setTitulo(request.getParameter("titulo"));
-                //material.setTipoMaterial(request.getParameter("tipo_material"));
-                //material.setAutor(request.getParameter("Autor"));
-                //material.setNumeroDePaginas(request.getParameter("numero_de_paginas"));
                 material.setEditorial(request.getParameter("editoriales"));
-                //material.setIsbn(request.getParameter("isbn"));
                 material.setPeriodicidad(request.getParameter("periodicidad"));
                 material.setFechaPublicacion(request.getParameter("fecha"));
-//                material.setArtista(request.getParameter("artistas"));
-//                material.setGenero(request.getParameter("generos"));
-//                material.setDuracion(request.getParameter("duracion"));
-//                material.setNumeroDeCanciones(request.getParameter("numero_de_canciones"));
-//                material.setDirector(request.getParameter("directores"));
                 material.setUbicacion(request.getParameter("ubicacion"));
-                //material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
                 material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
 
                 if (Validaciones.isEmpty(material.getTitulo())) {
                     listaErrores.add("Campo Titulo obligatorio");
                 }            
-//                if (Validaciones.isEmpty(material.getTipoMaterial())) {
-//                    listaErrores.add("Campo Tipo Material es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getAutor())) {
-//                    listaErrores.add("Campo Autor es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getNumeroDePaginas())) {
-//                    listaErrores.add("Campo numero de páginas es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getEditorial())) {
                     listaErrores.add("Campo Editorial es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getIsbn())) {
-//                    listaErrores.add("Campo ISBN es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getPeriodicidad())) {
                     listaErrores.add("Campo Periodicidad es obligatorio");
                 }
-                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
-                    listaErrores.add("Campo Fecha Publicación es obligatorio");
-                }
-//                if (Validaciones.isEmpty(material.getArtista())) {
-//                    listaErrores.add("Campo Artista es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getGenero())) {
-//                    listaErrores.add("Campo Genero es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getDuracion())) {
-//                    listaErrores.add("Campo Duración es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getNumeroDeCanciones())) {
-//                    listaErrores.add("Campo Numero de Canciones es obligatorio");
-//                }
-//                if (Validaciones.isEmpty(material.getDirector())) {
-//                    listaErrores.add("Campo Director es obligatorio");
+//                if (Validaciones.isEmpty(material.getFechaPublicacion().toString())) {
+//                    listaErrores.add("Campo Fecha Publicación es obligatorio");
 //                }
                 if (Validaciones.isEmpty(material.getUbicacion())) {
                     listaErrores.add("Campo Ubicación es obligatorio");
                 }
-//                if (Validaciones.isEmpty(material.getNombre_autor_CV())) {
-//                    listaErrores.add("Campo Autor de CV es obligatorio");
-//                }
                 if (Validaciones.isEmpty(material.getUnidadesDisponibles().toString())) {
                     listaErrores.add("Campo Unidades Disponibles es obligatorio");
                 }
@@ -674,7 +488,7 @@ public class MaterialControlador extends HttpServlet{
                     RequestDispatcher vista = request.getRequestDispatcher(acceso);
                     vista.forward(request, response);                    
                 } else {
-                    if (materialDao.agregar(material) > 0) {
+                    if (materialDao.insertarRevista(material) > 0) {
                         request.getSession().setAttribute("exito", "Material agregado exitosamente!");
                         response.sendRedirect(request.getContextPath() + "/MaterialControlador?accion=listar");
                         //acceso = listar;
@@ -722,7 +536,7 @@ public class MaterialControlador extends HttpServlet{
                 material.setNombre_autor_CV(request.getParameter("nombre_autor_cv"));
                 material.setUnidadesDisponibles(Integer.parseInt(request.getParameter("unidades_disponibles")));
 
-                                if (Validaciones.isEmpty(material.getTitulo())) {
+                if (Validaciones.isEmpty(material.getTitulo())) {
                     listaErrores.add("Campo Titulo obligatorio");
                 }            
                 if (Validaciones.isEmpty(material.getTipoMaterial())) {

@@ -121,40 +121,42 @@ public class MaterialesDAO {
     public int insertarLibros(Materiales materiales, int codigo) 
             throws SQLException{        
         
-        String sql = "INSERT INTO materiales (id,titulo,codigo_tipo_material,"
+        String sql = "INSERT INTO `materiales`(id,titulo,codigo_tipo_material,"
                 + "codigo_autor,numero_de_paginas,codigo_editorial,isbn,"
-                + "fecha_publicacion,unidades_disponibles, ubicacion) VALUES (?,?,4,?,?,?,?,?,?,?)";
+                + "fecha_publicacion,unidades_disponibles, ubicacion) VALUES (?,?,?,?,?,?,?,?,?,?)";
         //PreparedStatement stmt = null;
         
         if(conn == null || conn.isClosed()){
             conn = Conexion.getConnection();
         }        
         
-        ps = conn.prepareStatement(sql);
-        Connection conn = null;
+        //ps = conn.prepareStatement(sql);
+        //Connection conn = null;
         int rows = 0;
         
         //Llamar a los siguientes métodos, pasándole parámetros para obtener sus respectivos ID
-        int autorID = consultarAutorPorNombre(materiales.getAutor());
-        int editorialID = consultarEditorialPorNombre(materiales.getEditorial());
-
+        //int autorID = consultarAutorPorNombre(materiales.getAutor());
+        //int editorialID = consultarEditorialPorNombre(materiales.getEditorial());
+        
         try{
-            conn = Conexion.getConnection();
-            ps = conn.prepareStatement(sql);
+            //conn = Conexion.getConnection();
             int index = 1;
             if(codigo==1){
-                ps.setString(index++, crearID("LIB"));
+                materiales.setId(crearID("LIB"));
             } else {
-                ps.setString(index++, crearID("OBR"));   
+                materiales.setId(crearID("OBR"));
             }
-            ps.setString(index++, materiales.getTitulo());
-            ps.setInt(index++, autorID);
-            ps.setString(index++, materiales.getNumeroDePaginas());
-            ps.setInt(index++, editorialID);
-            ps.setString(index++, materiales.getIsbn());
-            ps.setString(index++, materiales.getFechaPublicacion());
-            ps.setInt(index++, materiales.getUnidadesDisponibles());
-            ps.setString(index++, materiales.getUbicacion());
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, materiales.getId());
+            ps.setString(2, materiales.getTitulo());
+            ps.setInt(3, 4);
+            ps.setInt(4, Integer.parseInt(materiales.getAutor()));
+            ps.setString(5, materiales.getNumeroDePaginas());
+            ps.setInt(6, Integer.parseInt(materiales.getEditorial()));
+            ps.setString(7, materiales.getIsbn());
+            ps.setString(8, materiales.getFechaPublicacion());
+            ps.setInt(9, materiales.getUnidadesDisponibles());
+            ps.setString(10, materiales.getUbicacion());
 
             rows = ps.executeUpdate();
         }catch(SQLException e){
@@ -176,10 +178,11 @@ public class MaterialesDAO {
         int rows = 0;
 
         try{
+            materiales.setId(crearID("TES"));
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(sql);
             int index = 1;
-            ps.setString(index++, crearID("CV"));
+            ps.setString(index++, materiales.getId());
             ps.setString(index++, materiales.getTitulo());
             ps.setString(index++, materiales.getNumeroDePaginas());
             ps.setString(index++, materiales.getUbicacion());
@@ -198,21 +201,21 @@ public class MaterialesDAO {
         + "VALUES (?,?,?,1,?,?,?,?,?,?)";
         //PreparedStatement ps = null;
         int rows = 0;
-        int idArtista = consultarArtistaPorNombre(materiales.getArtista());
-        int idGenero = consultarGeneroPorNombre(materiales.getGenero());
+        //int idArtista = consultarArtistaPorNombre(materiales.getArtista());
+        //int idGenero = consultarGeneroPorNombre(materiales.getGenero());
 
         try{
             if(conn == null || conn.isClosed()){
                 conn = Conexion.getConnection();
             }
-            
+            materiales.setId(crearID("CDA"));
             ps = conn.prepareStatement(sql);
             int index = 1;
-            ps.setString(index++, crearID("CDA"));
+            ps.setString(index++, materiales.getId());
             ps.setString(index++, materiales.getTitulo());
             ps.setString(index++, materiales.getFechaPublicacion());
-            ps.setInt(index++, idArtista);
-            ps.setInt(index++, idGenero);
+            ps.setInt(index++, Integer.parseInt(materiales.getArtista()));
+            ps.setInt(index++, Integer.parseInt(materiales.getGenero()));
             ps.setString(index++, materiales.getDuracion());
             ps.setString(index++, materiales.getNumeroDeCanciones());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
@@ -226,25 +229,23 @@ public class MaterialesDAO {
     }
     
     public int insertarDVD(Materiales materiales){
-        String sql = "INSERT INTO materiales (id,titulo,codigo_director,codigo_tipo_material,codigo_genero,duracion, u_disponibles, ubicacion)"
+        String sql = "INSERT INTO materiales (id,titulo,codigo_director,codigo_tipo_material,codigo_genero,duracion, unidades_disponibles, ubicacion)"
                         + "VALUES (?,?,?,2,?,?, ?, ?)";
-        int idGenero = consultarGeneroPorNombre(materiales.getGenero());
-        int idDirector = consultarDirectorPorNombre(materiales.getDirector());
-        //PreparedStatement ps = null;
-        //ResultSet rs = null;
+        //int idGenero = consultarGeneroPorNombre(materiales.getGenero());
+        //int idDirector = consultarDirectorPorNombre(materiales.getDirector());
         int rows = 0;
 
         try{
             if(conn == null || conn.isClosed()){
                 conn = Conexion.getConnection();
             }
-            
+            materiales.setId(crearID("DVD"));
             ps = conn.prepareStatement(sql);
             int index = 1;
-            ps.setString(index++, crearID("DVD"));
+            ps.setString(index++, materiales.getId());
             ps.setString(index++, materiales.getTitulo());
-            ps.setInt(index++, idDirector);
-            ps.setInt(index++, idGenero);
+            ps.setInt(index++, Integer.parseInt(materiales.getDirector()));
+            ps.setInt(index++, Integer.parseInt(materiales.getGenero()));
             ps.setString(index, materiales.getDuracion());
             ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
@@ -259,19 +260,19 @@ public class MaterialesDAO {
     public int insertarRevista(Materiales materiales){
         String sql = "INSERT INTO materiales (id,titulo,codigo_editorial,codigo_tipo_material,periodicidad,fecha_publicacion,unidades_disponibles, ubicacion)"
                  + "VALUES (?,?,?,3,?,?,?,?)";
-        int idEditorial = consultarEditorialPorNombre(materiales.getEditorial());
+        //int idEditorial = consultarEditorialPorNombre(materiales.getEditorial());
          int rows = 0;
 
          try{
             if(conn == null || conn.isClosed()){
                 conn = Conexion.getConnection();
             }
-             
+            materiales.setId(crearID("REV"));
             ps = conn.prepareStatement(sql);
             int index = 1;
-            ps.setString(index++, crearID("REV"));
+            ps.setString(index++, materiales.getId());
             ps.setString(index++, materiales.getTitulo());
-            ps.setInt(index++, idEditorial);
+            ps.setInt(index++, Integer.parseInt(materiales.getEditorial()));
             ps.setString(index++, materiales.getPeriodicidad());
             ps.setString(index++, materiales.getFechaPublicacion());
             ps.setInt(index++, materiales.getUnidadesDisponibles());
@@ -512,7 +513,7 @@ public class MaterialesDAO {
                 +"materiales.id, materiales.titulo,autores.nombre_autor AS Autor, "
                 +"materiales.numero_de_paginas, editoriales.nombre_editorial AS "
                 +"Editorial, materiales.isbn, materiales.periodicidad, "
-                +"date_format(materiales.fecha_publicacion, \"%d/%m/%Y\"), "
+                +"date_format(materiales.fecha_publicacion, '%d/%m/%Y\') "
                 +"AS fecha, materiales.ubicacion, materiales.nombre_autor_cv, "
                 +"artistas.nombre_artista AS Artista, materiales.duracion, "
                 +"materiales.numero_de_canciones,materiales.unidades_disponibles, "
@@ -525,7 +526,7 @@ public class MaterialesDAO {
                 +"materiales.codigo_tipo_material LEFT JOIN "
                 +"autores on autores.id = materiales.codigo_autor LEFT JOIN "
                 +"artistas ON artistas.id = materiales.codigo_artista LEFT JOIN "
-                +"editoriales ON editoriales.id = materiales.codigo_editorial  "
+                +"editoriales ON editoriales.id = materiales.codigo_editorial "
                 + "WHERE materiales.id ='"+ id +"'";
 
             if(conn == null || conn.isClosed()){
@@ -546,18 +547,18 @@ public class MaterialesDAO {
                
                 materiales.setId(rs.getString("id"));
                 materiales.setTitulo(rs.getString("titulo"));
-                materiales.setTipoMaterial(rs.getString("tipo_material"));
+                materiales.setTipoMaterial(rs.getString("Tipo"));
                 materiales.setAutor(rs.getString("Autor"));
                 materiales.setNumeroDePaginas(rs.getString("numero_de_paginas"));
-                materiales.setEditorial(rs.getString("editoriales"));
+                materiales.setEditorial(rs.getString("Editorial"));
                 materiales.setIsbn(rs.getString("isbn"));
                 materiales.setPeriodicidad(rs.getString("periodicidad"));
                 materiales.setFechaPublicacion(rs.getString("fecha"));
-                materiales.setArtista(rs.getString("artistas"));
-                materiales.setGenero(rs.getString("generos"));
+                materiales.setArtista(rs.getString("Artista"));
+                materiales.setGenero(rs.getString("Genero"));
                 materiales.setDuracion(rs.getString("duracion"));
                 materiales.setNumeroDeCanciones(rs.getString("numero_de_canciones"));
-                materiales.setDirector(rs.getString("directores"));
+                materiales.setDirector(rs.getString("Director"));
                 materiales.setUbicacion(rs.getString("ubicacion"));
                 materiales.setNombre_autor_CV(rs.getString("nombre_autor_cv"));
                 materiales.setUnidadesDisponibles(rs.getInt("unidades_disponibles"));
